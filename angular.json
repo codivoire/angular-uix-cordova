@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "babievent": {
+    "hybridapp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -57,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "babievent:build"
+            "browserTarget": "hybridapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "babievent:build:production"
+              "browserTarget": "hybridapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "babievent:build"
+            "browserTarget": "hybridapp:build"
           }
         },
         "lint": {
@@ -81,5 +81,5 @@
       }
     }
   },
-  "defaultProject": "babievent"
+  "defaultProject": "hybridapp"
 }
