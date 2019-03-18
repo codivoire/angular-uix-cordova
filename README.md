@@ -8,8 +8,6 @@
 
 <br>
 
-![template logo](banner.png "template logo")
-
 # Modern Hybrid App Boilerplate
 
 ### Preface
