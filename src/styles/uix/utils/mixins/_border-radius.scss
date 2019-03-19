@@ -1,0 +1,62 @@
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+            border-radius: $radius;
+}
+
+@mixin border-top-radius($radius) {
+    -webkit-border-radius: $radius $radius 0 0;
+       -moz-border-radius: $radius $radius 0 0;
+        -ms-border-radius: $radius $radius 0 0;
+            border-radius: $radius $radius 0 0;
+}
+
+@mixin border-bottom-radius($radius) {
+    -webkit-border-radius: 0 0 $radius $radius;
+       -moz-border-radius: 0 0 $radius $radius;
+        -ms-border-radius: 0 0 $radius $radius;
+            border-radius: 0 0 $radius $radius;
+}
+
+@mixin border-left-radius($radius) {
+    -webkit-border-radius: $radius 0 0 $radius;
+       -moz-border-radius: $radius 0 0 $radius;
+        -ms-border-radius: $radius 0 0 $radius;
+            border-radius: $radius 0 0 $radius;
+}
+
+@mixin border-right-radius($radius) {
+    -webkit-border-radius: 0 $radius $radius 0;
+       -moz-border-radius: 0 $radius $radius 0;
+        -ms-border-radius: 0 $radius $radius 0;
+            border-radius: 0 $radius $radius 0;
+}
+
+@mixin border-top-left-radius($radius) {
+    -webkit-border-top-left-radius: $radius;
+       -moz-border-top-left-radius: $radius;
+        -ms-border-top-left-radius: $radius;
+            border-top-left-radius: $radius;
+}
+
+@mixin border-bottom-left-radius($radius) {
+    -webkit-border-bottom-left-radius: $radius;
+       -moz-border-bottom-left-radius: $radius;
+        -ms-border-bottom-left-radius: $radius;
+            border-bottom-left-radius: $radius;
+}
+
+@mixin border-top-right-radius($radius) {
+    -webkit-border-top-right-radius: $radius;
+       -moz-border-top-right-radius: $radius;
+        -ms-border-top-right-radius: $radius;
+            border-top-right-radius: $radius;
+}
+
+@mixin border-bottom-right-radius($radius) {
+    -webkit-border-bottom-right-radius: $radius;
+       -moz-border-bottom-right-radius: $radius;
+        -ms-border-bottom-right-radius: $radius;
+            border-bottom-right-radius: $radius;
+}

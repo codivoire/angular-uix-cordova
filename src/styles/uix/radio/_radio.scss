@@ -1,0 +1,48 @@
+.icon-radio {
+	flex-shrink: 0;
+}
+
+.radio {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	z-index: 1;
+}
+
+label.item-radio,
+.radio {
+	cursor: pointer;
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		display: none;
+	}
+}
+
+label.item-radio .icon-radio,
+.radio .icon-radio {
+	box-sizing: border-box;
+	position: relative;
+	display: block;
+
+	&:after {
+		content: '';
+		position: absolute;
+	}
+}
+
+label.item-radio {
+	transition-duration: 300ms;
+
+	&.active-state {
+		@include hairline-color(bottom, transparent);
+	}
+
+	&.disabled,
+	.disabled & {
+		@include disabled();
+	}
+}
+
+@import "radio-ios.scss";
+@import "radio-md.scss";

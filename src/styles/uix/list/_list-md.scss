@@ -1,0 +1,12 @@
+.md {
+  .list {
+    ul {
+      ul {
+        padding-left: calc(var(--uix-list-item-padding-horizontal) + 40px);
+      }
+    }
+    .item-media {
+      min-width: 40px;
+    }
+  }
+}

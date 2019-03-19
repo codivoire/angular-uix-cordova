@@ -1,0 +1,40 @@
+.uix-md {
+  .icon-back,
+  .icon-forward,
+  .icon-next,
+  .icon-prev {
+    width: 24px;
+    // height: 24px;
+    &:after {
+      line-height: 1.2;
+    }
+  }
+  .item-media .icon {
+    color: #737373;
+  }
+  .item-media .material-icons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+  .icon-back {
+    &:after {
+      content: "\f27d";
+    }
+  }
+  .icon-forward {
+    &:after {
+      content: "\f287";
+    }
+  }
+  .icon-next {
+    &:after {
+      content: "\f287";
+    }
+  }
+  .icon-prev {
+    &:after {
+      content: "\f27d";
+    }
+  }
+}

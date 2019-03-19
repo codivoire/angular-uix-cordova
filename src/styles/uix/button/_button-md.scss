@@ -1,0 +1,11 @@
+.uix-md {
+  // Buttons
+  .button {
+    transition-duration: 300ms;
+    transform: translate3d(0,0,0);
+  }
+  .button-fill,
+  .button-fill-md {
+    --uix-button-pressed-bg-color: var(--uix-button-fill-pressed-bg-color, var(--uix-theme-color-shade));
+  }
+}

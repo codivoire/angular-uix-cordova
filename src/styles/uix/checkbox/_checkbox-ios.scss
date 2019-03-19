@@ -1,0 +1,70 @@
+.uix-ios {
+
+	.icon-checkbox,
+	.checkbox i {
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		border: 1px solid #c7c7cc;
+
+		&:after {
+			left: 50%;
+			top: 50%;
+			margin-left: -6px;
+			margin-top: -4px;
+			width: 12px;
+			height: 9px;
+		}
+	}
+
+	label.item-checkbox input[type="checkbox"]:checked~.icon-checkbox,
+	.checkbox input[type="checkbox"]:checked~i {
+		border: none;
+		background: $themeColor;
+
+		&:after {
+			background: no-repeat center;
+			background-image: svg("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20x%3D'0px'%20y%3D'0px'%20viewBox%3D'0%200%2012%209'%20xml%3Aspace%3D'preserve'%3E%3Cpolygon%20fill%3D'%23ffffff'%20points%3D'12%2C0.7%2011.3%2C0%203.9%2C7.4%200.7%2C4.2%200%2C4.9%203.9%2C8.8%203.9%2C8.8%203.9%2C8.8%20'%2F%3E%3C%2Fsvg%3E");
+			background-size: 12px 9px;
+		}
+	}
+
+	label.item-checkbox {
+		>.icon-checkbox {
+			margin-right: 15px;
+		}
+
+		.item-content,
+		&.item-content {
+			.item-media {
+				align-self: center;
+			}
+		}
+
+		&.active-state {
+			transition-duration: 0ms;
+			background-color: #d9d9d9;
+		}
+	}
+
+	// Colors
+	@each $name,
+	$color in $colorsList {
+		.color-theme-#{name} {
+
+			label.item-checkbox input[type="checkbox"]:checked~.icon-checkbox,
+			.checkbox input[type="checkbox"]:checked~i {
+				background: $color;
+			}
+		}
+	}
+
+	@each $name,
+	$color in $colorsList {
+
+		label.item-checkbox.color-#{name} input[type="checkbox"]:checked~.icon-checkbox,
+		.checkbox.color-#{name} input[type="checkbox"]:checked~i {
+			background: $color;
+		}
+	}
+}

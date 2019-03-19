@@ -1,0 +1,49 @@
+.icon-checkbox,
+.checkbox i {
+	flex-shrink: 0;
+}
+
+.checkbox {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	z-index: 1;
+}
+
+label.item-checkbox,
+.checkbox {
+	cursor: pointer;
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		display: none;
+	}
+}
+
+label.item-checkbox .icon-checkbox,
+.checkbox .icon-checkbox {
+	box-sizing: border-box;
+	position: relative;
+	display: block;
+
+	&:after {
+		content: '';
+		position: absolute;
+	}
+}
+
+label.item-checkbox {
+	transition-duration: 300ms;
+
+	&.active-state {
+		@include hairline-color(bottom, transparent);
+	}
+
+	&.disabled,
+	.disabled & {
+		@include disabled();
+	}
+}
+
+@import "checkbox-ios.scss";
+@import "checkbox-md.scss";

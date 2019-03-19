@@ -1,0 +1,8 @@
+{
+    "name": "uix",
+    "version": "1.2.0",
+    "description": "Awesome HTML framework",
+    "main": "./_uix.scss",
+    "author": "Lambirou",
+    "license": "MIT"
+}

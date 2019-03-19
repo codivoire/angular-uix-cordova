@@ -1,0 +1,299 @@
+/* radius */
+
+@for $i from 0 through 50 {
+  .radius-#{$i} {
+    @include border-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-t-#{$i} {
+    @include border-top-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-tl-#{$i} {
+    @include border-top-left-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-tr-#{$i} {
+    @include border-top-right-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-b-#{$i} {
+    @include border-bottom-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-bl-#{$i} {
+    @include border-bottom-left-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-br-#{$i} {
+    @include border-bottom-right-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-l-#{$i} {
+    @include border-left-radius(#{$i}px);
+  }
+}
+
+@for $i from 0 through 50 {
+  .radius-r-#{$i} {
+    @include border-right-radius(#{$i}px);
+  }
+}
+
+.radius-50pc {
+  @include border-radius(50%);
+}
+
+/* font */
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-normal {
+  font-weight: normal;
+}
+
+.font-underline {
+  text-decoration: underline;
+}
+
+.font-uppercase {
+  text-transform: uppercase;
+}
+
+.font-lowercase {
+  text-transform: lowercase;
+}
+
+.font-capitalize {
+  text-transform: capitalize;
+}
+
+@for $i from 0 through 100 {
+  .font-#{$i} {
+    font-size: #{$i}px !important;
+  }
+}
+
+/* colors & background */
+
+@each $key,
+$value in $colors {
+  .font-#{$key} {
+    color: $value !important;
+  }
+  .bg-#{$key} {
+    background: $value !important;
+  }
+}
+
+/* alignment */
+
+.align-left {
+  text-align: left !important;
+}
+
+.align-center {
+  text-align: center !important;
+}
+
+.align-right {
+  text-align: right !important;
+}
+
+.align-justify {
+  text-align: justify !important;
+}
+
+.align-vertical {
+  display: flex;
+  align-items: center;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-bottom {
+  vertical-align: bottom;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+/* margin & padding */
+
+@for $i from 0 through 100 {
+  .mg-#{$i} {
+    margin: #{$i}px !important;
+  }
+  .mg-t-#{$i} {
+    margin-top: #{$i}px !important;
+  }
+  .mg-b-#{$i} {
+    margin-bottom: #{$i}px !important;
+  }
+  .mg-l-#{$i} {
+    margin-left: #{$i}px !important;
+  }
+  .mg-r-#{$i} {
+    margin-right: #{$i}px !important;
+  }
+  .pd-#{$i} {
+    padding: #{$i}px !important;
+  }
+  .pd-t-#{$i} {
+    padding-top: #{$i}px !important;
+  }
+  .pd-b-#{$i} {
+    padding-bottom: #{$i}px !important;
+  }
+  .pd-l-#{$i} {
+    padding-left: #{$i}px !important;
+  }
+  .pd-r-#{$i} {
+    padding-right: #{$i}px !important;
+  }
+}
+
+/* width & height */
+
+$dimensions: 0,
+10,
+20,
+30,
+40,
+50,
+60,
+70,
+80,
+90,
+100;
+@each $i in $dimensions {
+  .w-#{$i} {
+    width: 1% * $i !important;
+  }
+  .w-d-#{$i} {
+    @media (min-width: $screen-md) {
+      width: 1% * $i !important;
+    }
+  }
+  .w-m-#{$i} {
+    @media (max-width: $screen-sm) {
+      width: 1% * $i !important;
+    }
+  }
+  .h-#{$i} {
+    height: 1% * $i !important;
+  }
+  .h-d-#{$i} {
+    @media (min-width: $screen-md) {
+      height: 1% * $i !important;
+    }
+  }
+  .h-m-#{$i} {
+    @media (max-width: $screen-sm) {
+      height: 1% * $i !important;
+    }
+  }
+}
+
+.w-auto,
+.width-auto {
+  width: auto !important;
+}
+
+/* display */
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-inline {
+  display: inline;
+}
+
+/* utils */
+
+.disabled {
+  @include disabled();
+}
+
+.hidden {
+  display: none !important;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid\9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.vertical-center-grid {
+  display: grid;
+  height: 100%;
+  .vertical-center-item {
+    margin: auto;
+    width: 100%;
+  }
+}
+
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  .vertical-center-item {
+    width: 100%;
+  }
+}
+
+/* target devices */
+
+/*.ios-only {
+  @supports not (-webkit-overflow-scrolling: touch) {
+    display: none !important;
+  }
+}
+
+.md-only {
+  @supports (-webkit-overflow-scrolling: touch) {
+    display: none !important;
+  }
+}*/

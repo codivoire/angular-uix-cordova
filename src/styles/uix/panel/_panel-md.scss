@@ -1,0 +1,9 @@
+.uix-md {
+  .uix-sidenav.open {
+    @include box-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+  }
+  .uix-sidenav-backdrop {
+    background: rgba(0, 0, 0, 0.2);
+    @include transition-duration(0.3s);
+  }
+}

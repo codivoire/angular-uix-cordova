@@ -1,0 +1,18 @@
+.uix-ios {
+  // Buttons
+  .button {
+    transition-duration: 100ms;
+  }
+  .button-fill,
+  .button-fill-ios {
+    --uix-button-pressed-bg-color: var(
+      --uix-button-fill-pressed-bg-color,
+      var(--uix-theme-color-tint)
+    );
+  }
+
+  .button-small,
+  .button-small-ios {
+    transition-duration: 200ms;
+  }
+}

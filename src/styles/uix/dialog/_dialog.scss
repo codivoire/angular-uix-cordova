@@ -1,0 +1,185 @@
+:root {
+  --uix-dialog-button-text-color: var(--uix-theme-color);
+}
+
+.uix-ios {
+  --uix-dialog-bg-color: rgba(255, 255, 255, 0.95);
+  --uix-dialog-box-shadow: none;
+  --uix-dialog-width: 270px;
+  --uix-dialog-border-radius: 13px;
+  --uix-dialog-text-color: #000;
+  --uix-dialog-text-align: center;
+  --uix-dialog-font-size: 14px;
+  --uix-dialog-title-text-color: inherit;
+  --uix-dialog-title-font-size: 18px;
+  --uix-dialog-title-font-weight: 600;
+  --uix-dialog-title-line-height: inherit;
+  --uix-dialog-button-font-size: 17px;
+  --uix-dialog-button-height: 44px;
+  --uix-dialog-button-letter-spacing: 0;
+  --uix-dialog-button-text-align: center;
+  --uix-dialog-button-font-weight: 400;
+  --uix-dialog-button-text-transform: none;
+  --uix-dialog-button-pressed-bg-color: rgba(230, 230, 230, 0.95);
+  --uix-dialog-input-font-size: 14px;
+  --uix-dialog-input-height: 32px;
+  --uix-dialog-input-bg-color: #fff;
+  --uix-dialog-input-border-color: rgba(0, 0, 0, 0.3);
+  --uix-dialog-input-border-width: 1px;
+  --uix-dialog-input-placeholder-color: #a9a9a9;
+  --uix-dialog-preloader-size: 34px;
+}
+
+.uix-md {
+  --uix-dialog-bg-color: #fff;
+  --uix-dialog-box-shadow: var(--uix-elevation-24);
+  --uix-dialog-width: 280px;
+  --uix-dialog-border-radius: 4px;
+  --uix-dialog-text-color: #757575;
+  --uix-dialog-text-align: left;
+  --uix-dialog-font-size: 16px;
+  --uix-dialog-title-text-color: #212121;
+  --uix-dialog-title-font-size: 20px;
+  --uix-dialog-title-font-weight: 500;
+  --uix-dialog-title-line-height: 1.3;
+  --uix-dialog-button-font-size: 14px;
+  --uix-dialog-button-height: 36px;
+  --uix-dialog-button-letter-spacing: 0.03em;
+  --uix-dialog-button-text-align: center;
+  --uix-dialog-button-font-weight: 500;
+  --uix-dialog-button-text-transform: uppercase;
+  --uix-dialog-button-pressed-bg-color: rgba(0, 0, 0, 0.1);
+  --uix-dialog-input-font-size: 16px;
+  --uix-dialog-input-height: 36px;
+  --uix-dialog-input-bg-color: #fff;
+  --uix-dialog-input-border-color: transparent;
+  --uix-dialog-input-border-width: 0px;
+  --uix-dialog-input-placeholder-color: rgba(0, 0, 0, 0.35);
+  --uix-dialog-preloader-size: 32px;
+}
+
+.dialog-backdrop {
+}
+
+.dialog {
+  position: absolute;
+  z-index: 13500;
+  left: 50%;
+  margin-top: 0;
+  top: 50%;
+  overflow: hidden;
+  opacity: 0;
+  transform: translate3d(0, -50%, 0) scale(1.185);
+  transition-property: transform, opacity;
+  display: none;
+  transition-duration: 400ms;
+  box-shadow: var(--uix-dialog-box-shadow);
+  width: var(--uix-dialog-width);
+  margin-left: calc(-1 * var(--uix-dialog-width) / 2);
+  border-radius: var(--uix-dialog-border-radius);
+  text-align: var(--uix-dialog-text-align);
+  color: var(--uix-dialog-text-color);
+  font-size: var(--uix-dialog-font-size);
+  will-change: transform, opacity;
+  &.modal-in {
+    opacity: 1;
+    transform: translate3d(0, -50%, 0) scale(1);
+  }
+  &.modal-out {
+    opacity: 0;
+    z-index: 13500 - 1;
+  }
+  &.not-animated {
+    transition-duration: 0ms;
+  }
+}
+
+.dialog-inner {
+  position: relative;
+}
+
+.dialog-title {
+  color: var(--uix-dialog-title-text-color);
+  font-size: var(--uix-dialog-title-font-size);
+  font-weight: var(--uix-dialog-title-font-weight);
+  line-height: var(--uix-dialog-title-line-height);
+}
+
+// Buttons
+.dialog-buttons {
+  position: relative;
+  display: flex;
+  .dialog-buttons-vertical & {
+    display: block;
+    height: auto !important;
+  }
+}
+
+.dialog-button {
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--uix-dialog-button-text-color);
+  font-size: var(--uix-dialog-button-font-size);
+  height: var(--uix-dialog-button-height);
+  line-height: var(--uix-dialog-button-height);
+  letter-spacing: var(--uix-dialog-button-letter-spacing);
+  text-align: var(--uix-dialog-button-text-align);
+  font-weight: var(--uix-dialog-button-font-weight);
+  text-transform: var(--uix-dialog-button-text-transform);
+  display: block;
+  cursor: pointer;
+}
+
+.dialog-button[class*="color-"] {
+  --uix-dialog-button-text-color: var(--uix-theme-color);
+}
+
+.dialog-no-buttons {
+  .dialog-buttons {
+    display: none;
+  }
+}
+
+// Inputs
+.dialog-input-field {
+  position: relative;
+}
+
+input.dialog-input[type] {
+  box-sizing: border-box;
+  margin: 0;
+  margin-top: 15px;
+  border-radius: 0;
+  appearance: none;
+  width: 100%;
+  display: block;
+  font-family: inherit;
+  box-shadow: none;
+  font-size: var(--uix-dialog-input-font-size);
+  height: var(--uix-dialog-input-height);
+  background-color: var(--uix-dialog-input-bg-color);
+  border: var(--uix-dialog-input-border-width) solid
+    var(--uix-dialog-input-border-color);
+  &::placeholder {
+    color: var(--uix-dialog-input-placeholder-color);
+  }
+}
+
+// Preloader
+.dialog-preloader {
+  .preloader {
+    --uix-preloader-size: var(--uix-dialog-preloader-size);
+  }
+}
+
+html.with-modal-dialog {
+  .page-content {
+    @include not-scrollable();
+  }
+}
+
+@import "dialog-ios.scss";
+@import "dialog-md.scss";

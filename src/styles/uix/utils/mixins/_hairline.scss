@@ -1,0 +1,221 @@
+// No Hairlines
+@mixin no-hairlines() {
+  &.no-hairlines,
+  &.no-hairlines ul,
+  .uix-md &.no-hairlines-md,
+  .uix-md &.no-hairlines-md ul,
+  .uix-ios &.no-hairlines-ios,
+  .uix-ios &.no-hairlines-ios ul {
+    @include hairline-remove(top);
+    @include hairline-remove(bottom);
+  }
+  &.no-hairline-top,
+  &.no-hairline-top ul,
+  .uix-md &.no-hairline-top-md,
+  .uix-md &.no-hairline-top-md ul,
+  .uix-ios &.no-hairline-top-ios,
+  .uix-ios &.no-hairline-top-ios ul {
+    @include hairline-remove(top);
+  }
+  &.no-hairline-bottom,
+  &.no-hairline-bottom ul,
+  .uix-md &.no-hairline-bottom-md,
+  .uix-md &.no-hairline-bottom-md ul,
+  .uix-ios &.no-hairline-bottom-ios,
+  .uix-ios &.no-hairline-bottom-ios ul {
+    @include hairline-remove(bottom);
+  }
+}
+
+@mixin no-hairlines-between() {
+  &.no-hairlines-between,
+  .uix-md &.no-hairlines-between-md,
+  .uix-ios &.no-hairlines-between-ios {
+    .item-inner,
+    .list-button,
+    .item-divider,
+    .list-group-title,
+    .list-group-title {
+      @include hairline-remove(bottom);
+    }
+    &.simple-list li {
+      @include hairline-remove(bottom);
+    }
+    &.links-list a {
+      @include hairline-remove(bottom);
+    }
+  }
+}
+
+// Hairlines
+@mixin hairline-pseudo($color, $top, $right, $bottom, $left) {
+  content: "";
+  position: absolute;
+  background-color: $color;
+  display: block;
+  z-index: 15;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin hairline($position, $color) {
+  @if $position == top {
+    &:before {
+      @include hairline-pseudo($color, 0, auto, auto, 0);
+      height: 1px;
+      width: 100%;
+      transform-origin: 50% 0%;
+      html.device-pixel-ratio-2 & {
+        transform: scaleY(0.5);
+      }
+      html.device-pixel-ratio-3 & {
+        transform: scaleY(0.33);
+      }
+    }
+  }
+
+  @if $position == bottom {
+    &:after {
+      @include hairline-pseudo($color, auto, auto, 0, 0);
+      height: 1px;
+      width: 100%;
+      transform-origin: 50% 100%;
+      html.device-pixel-ratio-2 & {
+        transform: scaleY(0.5);
+      }
+      html.device-pixel-ratio-3 & {
+        transform: scaleY(0.33);
+      }
+    }
+  }
+
+  @if $position == left {
+    &:before {
+      @include hairline-pseudo($color, 0, auto, auto, 0);
+      width: 1px;
+      height: 100%;
+      transform-origin: 0% 50%;
+      html.device-pixel-ratio-2 & {
+        transform: scaleX(0.5);
+      }
+      html.device-pixel-ratio-3 & {
+        transform: scaleX(0.33);
+      }
+    }
+  }
+
+  @if $position == right {
+    &:after {
+      @include hairline-pseudo($color, 0, 0, auto, auto);
+      width: 1px;
+      height: 100%;
+      transform-origin: 100% 50%;
+      html.device-pixel-ratio-2 & {
+        transform: scaleX(0.5);
+      }
+      html.device-pixel-ratio-3 & {
+        transform: scaleX(0.33);
+      }
+    }
+  }
+}
+
+@mixin hairline-root($selector, $position, $color) {
+  @if $position == top {
+    $selectorEscaped: e($selector);
+    #{$selectorEscaped}:before {
+      @include hairline-pseudo($color, 0, auto, auto, 0);
+      height: 1px;
+      width: 100%;
+      transform-origin: 50% 0%;
+    }
+    &.device-pixel-ratio-2 #{$selectorEscaped}:before {
+      transform: scaleY(0.5);
+    }
+    &.device-pixel-ratio-3 #{$selectorEscaped}:before {
+      transform: scaleY(0.33);
+    }
+  }
+
+  @if $position == bottom {
+    $selectorEscaped: e($selector);
+    #{$selectorEscaped}:after {
+      @include hairline-pseudo($color, auto, auto, 0, 0);
+      height: 1px;
+      width: 100%;
+      transform-origin: 50% 100%;
+    }
+    &.device-pixel-ratio-2 #{$selectorEscaped}:after {
+      transform: scaleY(0.5);
+    }
+    &.device-pixel-ratio-3 #{$selectorEscaped}:after {
+      transform: scaleY(0.33);
+    }
+  }
+
+  @if $position == right {
+    $selectorEscaped: $selector;
+    #{$selectorEscaped}:after {
+      @include hairline-pseudo($color, 0, 0, auto, auto);
+      width: 1px;
+      height: 100%;
+      transform-origin: 100% 50%;
+    }
+    &.device-pixel-ratio-2 #{$selectorEscaped}:after {
+      transform: scaleX(0.5);
+    }
+    &.device-pixel-ratio-3 #{$selectorEscaped}:after {
+      transform: scaleX(0.33);
+    }
+  }
+
+  @if $position == left {
+    $selectorEscaped: e($selector);
+    #{$selectorEscaped}:before {
+      @include hairline-pseudo($color, 0, auto, auto, 0);
+      width: 1px;
+      height: 100%;
+      transform-origin: 0% 50%;
+    }
+    &.device-pixel-ratio-2 #{$selectorEscaped}:before {
+      transform: scaleX(0.5);
+    }
+    &.device-pixel-ratio-3 #{$selectorEscaped}:before {
+      transform: scaleX(0.33);
+    }
+  }
+}
+
+@mixin hairline-color($position, $color) {
+  // For right and bottom
+  @if $position == left and not $position == top {
+    &:after {
+      background-color: $color;
+    }
+  }
+
+  // For left and top
+  @if $position == right and not $position == bottom {
+    &:before {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin hairline-remove($position) {
+  // For right and bottom
+  @if not $position == left and not $position == top {
+    &:after {
+      display: none !important;
+    }
+  }
+
+  // For left and top
+  @if not $position == right and not $position == bottom {
+    &:before {
+      display: none !important;
+    }
+  }
+}

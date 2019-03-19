@@ -1,0 +1,6 @@
+.uix-md {
+  .ios-only,
+  .if-ios {
+    display: none !important;
+  }
+}

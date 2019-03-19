@@ -1,0 +1,39 @@
+.uix-md {
+  .navbar {
+    a.link {
+      padding: 0 16px;
+      min-width: 48px;
+      @include md-link-highlight();
+    }
+    a.icon-only {
+      min-width: 0;
+      flex-shrink: 0;
+      width: 56px;
+    }
+    .right {
+      margin-left: auto;
+    }
+    .right:first-child {
+      right: var(--uix-safe-area-right);
+    }
+  }
+  .navbar-inner {
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  .navbar-inner-large:not(.navbar-inner-large-collapsed) {
+    overflow: visible;
+  }
+  .page.page-with-subnavbar .navbar-inner {
+    overflow: visible;
+  }
+  .navbar-inner-centered-title {
+    justify-content: space-between;
+    .right {
+      margin-left: 0;
+    }
+    .title {
+      text-align: center;
+    }
+  }
+}

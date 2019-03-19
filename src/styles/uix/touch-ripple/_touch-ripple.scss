@@ -1,0 +1,71 @@
+:root {
+  --uix-touch-ripple-black: rgba(0, 0, 0, 0.1);
+  --uix-touch-ripple-white: rgba(255, 255, 255, 0.3);
+  --uix-touch-ripple-color: var(--uix-touch-ripple-black);
+}
+
+.theme-dark {
+  --uix-touch-ripple-color: var(--uix-touch-ripple-white);
+}
+
+// Ripple Elements
+.ripple,
+.fab a,
+a.link,
+a.item-link,
+a.list-button,
+.button,
+.dialog-button,
+.tab-link,
+.radio,
+.checkbox,
+.actions-button,
+.speed-dial-buttons a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+// Ripple
+.ripple-wave {
+  left: 0;
+  top: 0;
+  position: absolute !important;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  transform: translate3d(0px, 0px, 0) scale(0);
+  transition-duration: 1400ms;
+  background-color: var(--uix-touch-ripple-color);
+  will-change: transform, opacity;
+  &.ripple-wave-fill {
+    transition-duration: 300ms;
+    opacity: 0.35;
+  }
+  &.ripple-wave-out {
+    transition-duration: 600ms;
+    opacity: 0;
+  }
+  .button-fill &,
+  .picker-calendar-day &,
+  .menu & {
+    z-index: 1;
+  }
+}
+
+.checkbox,
+.radio,
+.data-table .sortable-cell {
+  .ripple-wave {
+    z-index: 0;
+  }
+}
+
+[class*="ripple-color-"] {
+  --uix-touch-ripple-color: var(--uix-theme-color-ripple-color);
+}
+
+@import "touch-ripple-ios.scss";
+@import "touch-ripple-md.scss";

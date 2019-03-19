@@ -1,0 +1,9 @@
+.uix-ios {
+  .link {
+    transition: opacity 300ms;
+    &.active-state {
+      opacity: 0.3;
+      transition-duration: 0ms;
+    }
+  }
+}

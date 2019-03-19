@@ -1,0 +1,68 @@
+.uix-transition-md {
+  @include transition-property(opacity, transform);
+  @include transition-duration(var(--uix-page-transition-duration));
+  @include transition-timing-function(
+    var(--uix-page-transtion-timing-function)
+  );
+  opacity: 1;
+  &.ng-enter,
+  &.ng-enter-active {
+    z-index: $z-index-view-above;
+  }
+  &.ng-leave,
+  &.ng-leave-active {
+    pointer-events: none;
+    z-index: $z-index-view-below;
+    @include transition-duration(var(--uix-page-swipeback-transition-duration));
+  }
+  &.ng-enter {
+    opacity: 0;
+    pointer-events: none;
+    @include transform(translate3d(0, 56px, 0));
+  }
+  &.ng-enter-active {
+    opacity: 1;
+    pointer-events: auto;
+    @include transform(translate3d(0, 0, 0));
+  }
+  &.ng-leave {
+    opacity: 1;
+  }
+  &.ng-leave-active {
+    opacity: 0;
+  }
+}
+
+.uix-transition-backward .uix-transition-md {
+  &.ng-enter,
+  &.ng-enter-active {
+    z-index: $z-index-view-below;
+  }
+  &.ng-leave,
+  &.ng-leave-active {
+    z-index: $z-index-view-above;
+    @include transition-duration(var(--uix-page-transition-duration));
+  }
+  &.ng-enter,
+  &.ng-enter-active,
+  &.ng-leave {
+    @include transform(translate3d(0, 0, 0));
+  }
+  &.ng-enter {
+    opacity: 1;
+    pointer-events: none;
+  }
+  &.ng-enter-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  &.ng-leave {
+    opacity: 1;
+    pointer-events: none;
+  }
+  &.ng-leave-active {
+    opacity: 0;
+    pointer-events: none;
+    @include transform(translate3d(0, 56px, 0));
+  }
+}

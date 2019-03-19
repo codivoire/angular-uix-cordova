@@ -1,0 +1,6 @@
+.uix-ios {
+  .uix-sidenav-backdrop {
+    background: rgba(0, 0, 0, 0);
+    @include transition-duration(0.4s);
+  }
+}

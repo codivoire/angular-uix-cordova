@@ -1,0 +1,297 @@
+// MD Active Active Links Highlights
+@mixin md-link-highlight($color: rgba(255, 255, 255, 0.15)) {
+  &:before {
+    content: "";
+    width: 152%;
+    height: 152%;
+    position: absolute;
+    left: -26%;
+    top: -26%;
+    background-image: radial-gradient(
+      circle at center,
+      $color 66%,
+      rgba(red($color), green($color), blue($color), 0) 66%
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition-duration: 600ms;
+  }
+
+  &.active-state:before {
+    opacity: 1;
+    transition-duration: 150ms;
+  }
+}
+
+@mixin md-link-highlight-color($color) {
+  &:before {
+    background-image: radial-gradient(
+      circle at center,
+      $color 66%,
+      rgba(red($color), green($color), blue($color), 0) 66%
+    );
+  }
+}
+
+// MD Button
+@mixin md-button() {
+  color: $themeColor;
+  border-radius: 2px;
+  line-height: 36px;
+  height: 36px;
+  text-transform: uppercase;
+  min-width: 64px;
+  padding: 0 8px;
+  border: none;
+  transition-duration: 300ms;
+  transform: translate3d(0, 0, 0);
+
+  &.active-state {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &.button-fill,
+  &.button-active,
+  &.tab-link-active {
+    background-color: $themeColor;
+    color: #fff;
+
+    &.active-state {
+      background: darken($themeColor, 8%);
+    }
+  }
+
+  &.button-big {
+    height: 48px;
+    line-height: 48px;
+    border-radius: 3px;
+  }
+
+  &.button-round {
+    border-radius: 36px;
+  }
+
+  i.icon + span,
+  span:not(.ripple-wave) + span,
+  span:not(.ripple-wave) + i.icon,
+  i.icon + i.icon {
+    margin-left: 8px;
+  }
+
+  // Raised (with shadow) buttons
+  &.button-raised {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+    &.active-state {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+}
+
+// MD Shadows
+@mixin md-depth($level: 1) {
+  @if $level == 1 {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+  @if $level == 2 {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  @if $level == 3 {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  @if $level == 4 {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  @if $level == 5 {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  }
+}
+
+@mixin elevation($level: 1) {
+  @if $level == 0 {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+
+  @if $level == 1 {
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 2 {
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 3 {
+    box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+      0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 4 {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 5 {
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 6 {
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 7 {
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
+      0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 8 {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 9 {
+    box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2),
+      0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 10 {
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
+      0px 10px 14px 1px rgba(0, 0, 0, 0.14),
+      0px 4px 18px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 11 {
+    box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2),
+      0px 11px 15px 1px rgba(0, 0, 0, 0.14),
+      0px 4px 20px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 12 {
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+      0px 12px 17px 2px rgba(0, 0, 0, 0.14),
+      0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 13 {
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2),
+      0px 13px 19px 2px rgba(0, 0, 0, 0.14),
+      0px 5px 24px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 14 {
+    box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2),
+      0px 14px 21px 2px rgba(0, 0, 0, 0.14),
+      0px 5px 26px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 15 {
+    box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2),
+      0px 15px 22px 2px rgba(0, 0, 0, 0.14),
+      0px 6px 28px 5px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 16 {
+    box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
+      0px 16px 24px 2px rgba(0, 0, 0, 0.14),
+      0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 17 {
+    box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2),
+      0px 17px 26px 2px rgba(0, 0, 0, 0.14),
+      0px 6px 32px 5px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 18 {
+    box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2),
+      0px 18px 28px 2px rgba(0, 0, 0, 0.14),
+      0px 7px 34px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 19 {
+    box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2),
+      0px 19px 29px 2px rgba(0, 0, 0, 0.14),
+      0px 7px 36px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 20 {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+      0px 20px 31px 3px rgba(0, 0, 0, 0.14),
+      0px 8px 38px 7px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 21 {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2),
+      0px 21px 33px 3px rgba(0, 0, 0, 0.14),
+      0px 8px 40px 7px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 22 {
+    box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2),
+      0px 22px 35px 3px rgba(0, 0, 0, 0.14),
+      0px 8px 42px 7px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 23 {
+    box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2),
+      0px 23px 36px 3px rgba(0, 0, 0, 0.14),
+      0px 9px 44px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  @if $level == 24 {
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+      0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+      0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  }
+}
+
+// MD Bars Shadow
+@mixin md-bar-shadow-remove() {
+  &:after {
+    display: none;
+  }
+}
+
+@mixin md-bar-shadow-to-bottom($image) {
+  &:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 100%;
+    top: 100%;
+    bottom: auto;
+    height: 8px;
+    pointer-events: none;
+    background: $image;
+  }
+}
+
+@mixin md-bar-shadow-to-top($image) {
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 100%;
+    bottom: 100%;
+    height: 8px;
+    top: auto;
+    pointer-events: none;
+    background: $image;
+  }
+}
+
+@mixin md-bar-no-shadow() {
+  &:after {
+    display: none;
+  }
+}

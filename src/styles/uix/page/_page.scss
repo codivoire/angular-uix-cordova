@@ -1,0 +1,56 @@
+.uix-ios {
+  --uix-page-bg-color: #efeff4;
+}
+
+.uix-md {
+  --uix-page-bg-color: #fff;
+}
+
+.uix-theme-dark {
+  --uix-page-bg-color: #171717;
+}
+
+.view {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.pages {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.page {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  contain: layout size style;
+  @include transform(translate3d(0, 0, 0));
+  z-index: $z-index-view;
+}
+
+.page-content {
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  z-index: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  contain: layout size style;
+  will-change: scroll-position;
+  -webkit-overflow-scrolling: touch;
+  &.no-navbar {
+    padding-top: 0 !important;
+  }
+}
+
+@import "page-ios";
+@import "page-md";

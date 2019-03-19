@@ -1,0 +1,33 @@
+.uix-transition-fade {
+  @include transition(opacity var(--uix-page-transition-duration));
+  @include opacity(1);
+  &.ng-enter {
+    @include opacity(0);
+  }
+  &.ng-enter-active {
+    @include opacity(1);
+  }
+  &.ng-leave {
+    @include opacity(1);
+  }
+  &.ng-leave-active {
+    @include opacity(0);
+  }
+}
+
+.uix-transition-backward .uix-transition-fade {
+  @include transition(opacity var(--uix-page-swipeback-transition-duration));
+  @include opacity(1);
+  &.ng-enter {
+    @include opacity(0);
+  }
+  &.ng-enter-active {
+    @include opacity(1);
+  }
+  &.ng-leave {
+    @include opacity(1);
+  }
+  &.ng-leave-active {
+    @include opacity(0);
+  }
+}

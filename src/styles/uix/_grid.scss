@@ -1,0 +1,85 @@
+/* mixins */
+
+@mixin float-grid-columns($class, $i: 1, $list: ".#{$class}-#{$i}") {
+    @for $i from (1 + 1) through $grid-columns {
+        $list: "#{$list}, .#{$class}-#{$i}";
+    }
+    #{$list} {
+        float: left;
+    }
+}
+
+@mixin calc-grid-column($index, $class, $type) {
+    @if ($type==width) and ($index > 0) {
+        .#{$class}-#{$index} {
+            width: percentage(($index / $grid-columns));
+        }
+    }
+    @if ($type==offset) {
+        .#{$class}-offset-#{$index} {
+            margin-left: percentage(($index / $grid-columns));
+        }
+    }
+}
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin loop-grid-columns($columns, $class, $type) {
+    @for $i from 0 through $columns {
+        @include calc-grid-column($i, $class, $type);
+    }
+}
+
+// Create grid for specific class
+@mixin make-grid($class) {
+    @include float-grid-columns($class);
+    @include loop-grid-columns($grid-columns, $class, width);
+    @include loop-grid-columns($grid-columns, $class, pull);
+    @include loop-grid-columns($grid-columns, $class, push);
+    @include loop-grid-columns($grid-columns, $class, offset);
+}
+
+
+/*Extends*/
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: floor(($grid-gutter / 2));
+    padding-right: ceil(($grid-gutter / 2));
+    @include clearfix;
+    @media (min-width: $screen-sm) {
+        width: $container-sm;
+    }
+    @media (min-width: $screen-md) {
+        width: $container-md;
+    }
+    @media (min-width: $screen-lg) {
+        width: $container-lg;
+    }
+}
+
+.row {
+    @include clearfix;
+    margin-left: ceil(($grid-gutter / -2));
+    margin-right: floor(($grid-gutter / -2));
+}
+
+.col {
+    position: relative; // Prevent columns from collapsing when empty
+    min-height: 1px; // Inner gutter via padding
+    padding-left: ceil(($grid-gutter / 2));
+    padding-right: floor(($grid-gutter / 2));
+}
+
+@include make-grid('x');
+@media (min-width: $screen-sm) {
+    @include make-grid('s');
+}
+
+@media (min-width: $screen-md) {
+    @include make-grid('m');
+}
+
+@media (min-width: $screen-lg) {
+    @include make-grid('l');
+}
