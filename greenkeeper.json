@@ -1,0 +1,11 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "dist/uix/package.json",
+        "package.json",
+        "src/styles/uix/package.json"
+      ]
+    }
+  }
+}
