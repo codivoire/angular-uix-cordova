@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" class="uix-ios">
+<html lang="en">
   <head>
-    <base href="./" />
     <title>Hybrid App</title>
     <meta charset="utf-8" />
 
+    <base href="/" />
+
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
+
+    <!-- add to homescreen for ios -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <!-- Color theme for statusbar -->
     <meta name="theme-color" content="#99003C" />
+
     <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
   </head>
   <body>
     <app-root></app-root>
-    <script type="text/javascript" src="cordova.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
   </body>
 </html>

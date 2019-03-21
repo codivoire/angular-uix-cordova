@@ -21,7 +21,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.json",
             "assets": ["src/assets"],
             "styles": ["src/styles/bundle.scss"],
             "scripts": [],
@@ -74,7 +74,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json"],
+            "tsConfig": ["tsconfig.json"],
             "exclude": ["**/node_modules/**"]
           }
         }

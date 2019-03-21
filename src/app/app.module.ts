@@ -1,6 +1,11 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from "@angular/core";
+
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+
+import { PlatformService, RouterOutletComponent } from "../uix/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -16,10 +21,11 @@ import { SettingsComponent } from "./settings/settings.component";
     HomeComponent,
     AboutComponent,
     ProfileComponent,
-    SettingsComponent
+    SettingsComponent,
+    RouterOutletComponent
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
-  providers: [],
+  providers: [PlatformService, StatusBar, SplashScreen],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

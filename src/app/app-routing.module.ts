@@ -13,19 +13,23 @@ const appRoutes: Routes = [
   },
   {
     path: "home",
-    component: HomeComponent
+    component: HomeComponent,
+    data: { state: "home" }
   },
   {
     path: "profile",
-    component: ProfileComponent
+    component: ProfileComponent,
+    data: { state: "profile" }
   },
   {
     path: "about",
-    component: AboutComponent
+    component: AboutComponent,
+    data: { state: "about" }
   },
   {
     path: "settings",
-    component: SettingsComponent
+    component: SettingsComponent,
+    data: { state: "settings" }
   },
   {
     path: "**",
@@ -34,11 +38,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes, {
-      useHash: true
-    })
-  ],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -1,22 +1,35 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
 
-import { routerTransition } from "./shared/router.animations";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+
+import { PlatformService } from "../uix/core";
 
 @Component({
   selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
-  animations: [routerTransition]
+  template: `
+    <div class="uix-root {{ platformClass }}">
+      <app-router-outlet></app-router-outlet>
+    </div>
+  `
 })
 export class AppComponent {
-  title = "Hybrid App";
+  platformClass = this.platform.is("ios") ? "uix-ios" : "uix-md";
 
-  prepareRoute(outlet: RouterOutlet) {
-    return (
-      outlet &&
-      outlet.activatedRouteData &&
-      outlet.activatedRouteData["animation"]
-    );
+  constructor(
+    private platform: PlatformService,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar
+  ) {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.platform.ready(() => {
+      if (this.platform.is("cordova")) {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      }
+    });
   }
 }

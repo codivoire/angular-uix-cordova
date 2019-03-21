@@ -1,0 +1,22 @@
+{
+  "name": "uix",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/animations": "~7.2.0",
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "main": "bundles/uix.umd.js",
+  "module": "fesm5/uix.js",
+  "es2015": "fesm2015/uix.js",
+  "esm5": "esm5/uix.js",
+  "esm2015": "esm2015/uix.js",
+  "fesm5": "fesm5/uix.js",
+  "fesm2015": "fesm2015/uix.js",
+  "typings": "uix.d.ts",
+  "metadata": "uix.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

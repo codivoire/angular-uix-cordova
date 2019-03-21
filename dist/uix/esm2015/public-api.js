@@ -1,0 +1,8 @@
+/*
+ * Public API Surface of uix
+ */
+export * from "./lib/providers/config";
+export * from "./lib/providers/platform";
+export * from "./lib/utils/transition";
+export * from "./lib/uix.module";
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL3VpeC8iLCJzb3VyY2VzIjpbInB1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLHdCQUF3QixDQUFDO0FBQ3ZDLGNBQWMsMEJBQTBCLENBQUM7QUFDekMsY0FBYyx3QkFBd0IsQ0FBQztBQUN2QyxjQUFjLGtCQUFrQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiB1aXhcbiAqL1xuXG5leHBvcnQgKiBmcm9tIFwiLi9saWIvcHJvdmlkZXJzL2NvbmZpZ1wiO1xuZXhwb3J0ICogZnJvbSBcIi4vbGliL3Byb3ZpZGVycy9wbGF0Zm9ybVwiO1xuZXhwb3J0ICogZnJvbSBcIi4vbGliL3V0aWxzL3RyYW5zaXRpb25cIjtcbmV4cG9ydCAqIGZyb20gXCIuL2xpYi91aXgubW9kdWxlXCI7XG4iXX0=
