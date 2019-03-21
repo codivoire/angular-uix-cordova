@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lambirou/cordova-angular-uix.svg?branch=master)](https://travis-ci.org/lambirou/cordova-angular-uix)
 [![dependencies Status](https://david-dm.org/lambirou/cordova-angular-uix/status.svg)](https://david-dm.org/lambirou/cordova-angular-uix)
-[![devDependencies Status](https://david-dm.org/lambirou/cordova-angular-uix/dev-status.svg)](https://david-dm.org/lambirou/cordova-angular-uix?type=dev)
+[![devDependencies Status](https://david-dm.org/lambirou/cordova-angular-uix/dev-status.svg)](https://david-dm.org/lambirou/cordova-angular-uix?type=dev) [![Greenkeeper badge](https://badges.greenkeeper.io/lambirou/cordova-angular-uix.svg)](https://greenkeeper.io/)
 [![Gitter][chat-img]][chat]
 
 [chat-img]: https://img.shields.io/badge/Chat-on_gitter-teal.svg
