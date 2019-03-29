@@ -190,14 +190,14 @@
 
 @mixin hairline-color($position, $color) {
   // For right and bottom
-  @if $position == left and not $position == top {
+  @if $position == left and $position != top {
     &:after {
       background-color: $color;
     }
   }
 
   // For left and top
-  @if $position == right and not $position == bottom {
+  @if $position == right and $position != bottom {
     &:before {
       background-color: $color;
     }
@@ -206,14 +206,14 @@
 
 @mixin hairline-remove($position) {
   // For right and bottom
-  @if not $position == left and not $position == top {
+  @if $position != left and $position != top {
     &:after {
       display: none !important;
     }
   }
 
   // For left and top
-  @if not $position == right and not $position == bottom {
+  @if $position != right and $position != bottom {
     &:before {
       display: none !important;
     }

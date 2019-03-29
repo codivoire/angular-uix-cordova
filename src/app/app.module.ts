@@ -14,10 +14,12 @@ import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { SettingsComponent } from "./settings/settings.component";
+import { BackDirective } from "./back.directive";
 
 @NgModule({
   declarations: [
     AppComponent,
+    BackDirective,
     HomeComponent,
     AboutComponent,
     ProfileComponent,
@@ -26,6 +28,7 @@ import { SettingsComponent } from "./settings/settings.component";
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
   providers: [PlatformService, StatusBar, SplashScreen],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [BackDirective]
 })
 export class AppModule {}

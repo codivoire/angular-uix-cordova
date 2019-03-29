@@ -1,7 +1,7 @@
 import { animate, style, group, query, transition } from "@angular/animations";
 
-const OFF_BOTTOM = "56px";
-const CENTER = "0px";
+const ANIMATION_FORWARD = "400ms cubic-bezier(0.36,0.66,0.04,1)";
+const ANIMATION_BACK = "200ms cubic-bezier(0.47,0,0.745,0.715)";
 
 const opts = {
   optional: true
@@ -20,61 +20,49 @@ const initial = [
   )
 ];
 
-export const MdTranstion = {
-  forward: [
-    transition("* <=> *", [
-      ...initial,
-      query(":enter", style({ zIndex: 2 }), opts),
-      query(":leave", style({ zIndex: 1 }), opts),
-      group([
-        query(
-          ":enter",
-          [
+export const MdTranstion = [
+  transition("* => 1", [
+    ...initial,
+    query(":enter", style({ zIndex: 2 }), opts),
+    query(":leave", style({ zIndex: 1 }), opts),
+    group([
+      query(
+        ":enter",
+        [
+          style({
+            transform: "translateY(56px)",
+            opacity: 0.01
+          }),
+          animate(
+            ANIMATION_FORWARD,
+            style({ transform: "translateY(0px)", opacity: 1 })
+          )
+        ],
+        opts
+      ),
+      query(":leave", [style({ transform: "translateY(0px)" })], opts)
+    ])
+  ]),
+  transition("* => 2", [
+    ...initial,
+    query(":enter", style({ zIndex: 1 }), opts),
+    query(":leave", style({ zIndex: 2 }), opts),
+    group([
+      query(":enter", [style({ transform: "translateY(0px)" })], opts),
+      query(
+        ":leave",
+        [
+          style({ transform: "translateY(0px)", opacity: 1 }),
+          animate(
+            ANIMATION_BACK,
             style({
-              transform: "translateY(" + OFF_BOTTOM + ")",
+              transform: "translateY(56px)",
               opacity: 0.01
-            }),
-            animate(
-              "400ms cubic-bezier(0.36,0.66,0.04,1)",
-              style({ transform: "translateY(" + CENTER + ")", opacity: 1 })
-            )
-          ],
-          opts
-        ),
-        query(
-          ":leave",
-          [style({ transform: "translateY(" + CENTER + ")" })],
-          opts
-        )
-      ])
+            })
+          )
+        ],
+        opts
+      )
     ])
-  ],
-  back: [
-    transition("* <=> *", [
-      ...initial,
-      query(":enter", style({ zIndex: 1 }), opts),
-      query(":leave", style({ zIndex: 2 }), opts),
-      group([
-        query(
-          ":enter",
-          [style({ transform: "translateY(" + CENTER + ")" })],
-          opts
-        ),
-        query(
-          ":leave",
-          [
-            style({ transform: "translateY(" + CENTER + ")", opacity: 1 }),
-            animate(
-              "200ms cubic-bezier(0.47,0,0.745,0.715)",
-              style({
-                transform: "translateY(" + OFF_BOTTOM + ")",
-                opacity: 0.01
-              })
-            )
-          ],
-          opts
-        )
-      ])
-    ])
-  ]
-};
+  ])
+];

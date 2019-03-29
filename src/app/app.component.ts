@@ -8,14 +8,12 @@ import { PlatformService } from "../uix/core";
 @Component({
   selector: "app-root",
   template: `
-    <div class="uix-root {{ platformClass }}">
+    <div class="uix-root">
       <app-router-outlet></app-router-outlet>
     </div>
   `
 })
 export class AppComponent {
-  platformClass = this.platform.is("ios") ? "uix-ios" : "uix-md";
-
   constructor(
     private platform: PlatformService,
     private splashScreen: SplashScreen,

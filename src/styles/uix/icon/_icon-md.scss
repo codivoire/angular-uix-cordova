@@ -5,35 +5,34 @@
   .icon-prev {
     width: 24px;
     // height: 24px;
-    &:after {
+    &:before {
       line-height: 1.2;
+      font-size: 24px;
     }
   }
   .item-media .icon {
     color: #737373;
-  }
-  .item-media .material-icons {
     font-size: 24px;
     width: 24px;
     height: 24px;
   }
   .icon-back {
-    &:after {
+    &:before {
       content: "\f27d";
     }
   }
   .icon-forward {
-    &:after {
+    &:before {
       content: "\f287";
     }
   }
   .icon-next {
-    &:after {
+    &:before {
       content: "\f287";
     }
   }
   .icon-prev {
-    &:after {
+    &:before {
       content: "\f27d";
     }
   }

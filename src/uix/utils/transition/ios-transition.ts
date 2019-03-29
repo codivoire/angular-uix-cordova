@@ -2,75 +2,93 @@ import { animate, style, group, query, transition } from "@angular/animations";
 
 const DURATION = "500ms";
 const EASING = "cubic-bezier(0.36,0.66,0.04,1)";
-const CENTER = "0%";
-const OFF_OPACITY = 0.8;
+const ANIMATION = DURATION + " " + EASING;
 
-const animation = DURATION + " " + EASING;
 const opts = {
   optional: true
 };
+const initial = [
+  query(
+    ":enter, :leave",
+    style({
+      position: "fixed",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: "100%"
+    }),
+    opts
+  )
+];
 
-export const IosTranstion = {
-  forward: [
-    transition("* <=> *", [
+export const IosTranstion = [
+  transition("* => 1", [
+    ...initial,
+    query(":enter", style({ zIndex: 2 }), opts),
+    query(":leave", style({ zIndex: 1 }), opts),
+    group([
       query(
-        ":enter, :leave",
-        style({
-          position: "fixed",
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%"
-        }),
+        ":enter",
+        [
+          style({ transform: "translateX(100%)" }),
+          animate(ANIMATION, style({ transform: "translateX(0%)" }))
+        ],
         opts
       ),
-      query(":enter", style({ zIndex: 2 }), opts),
-      query(":leave", style({ zIndex: 1 }), opts),
-      group([
-        query(
-          ":enter",
-          [
-            style({ transform: "translateX(100%)" }),
-            animate(animation, style({ transform: "translateX(0%)" }))
-          ],
-          opts
-        ),
-        query(
-          ":leave",
-          [
-            style({ transform: "translateX(0%)" }),
-            animate(animation, style({ transform: "translateX(-20%)" }))
-          ],
-          opts
-        )
-      ])
-    ])
-  ],
-  back: [
-    transition("* <=> *", [
       query(
-        ":enter, :leave",
-        style({
-          position: "fixed",
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%"
-        }),
-        opts
-      ),
-      query(":enter", style({ zIndex: 1 }), opts),
-      query(":leave", style({ zIndex: 2 }), opts),
-      group([
-        query(":enter", [
-          style({ transform: "translateX(-20%)" }),
-          animate("500ms " + EASING, style({ transform: "translateX(0%)" }))
-        ]),
-        query(":leave", [
+        ":leave",
+        [
           style({ transform: "translateX(0%)" }),
-          animate("500ms " + EASING, style({ transform: "translateX(100%)" }))
-        ])
-      ])
+          animate(ANIMATION, style({ transform: "translateX(-20%)" }))
+        ],
+        opts
+      )
     ])
-  ]
-};
+  ]),
+  transition("1 <=> 1", [
+    ...initial,
+    query(":enter", style({ zIndex: 2 }), opts),
+    query(":leave", style({ zIndex: 1 }), opts),
+    group([
+      query(
+        ":enter",
+        [
+          style({ transform: "translateX(100%)" }),
+          animate(ANIMATION, style({ transform: "translateX(0%)" }))
+        ],
+        opts
+      ),
+      query(
+        ":leave",
+        [
+          style({ transform: "translateX(0%)" }),
+          animate(ANIMATION, style({ transform: "translateX(-20%)" }))
+        ],
+        opts
+      )
+    ])
+  ]),
+  transition("* => 2", [
+    ...initial,
+    query(":enter", style({ zIndex: 1 }), opts),
+    query(":leave", style({ zIndex: 2 }), opts),
+    group([
+      query(
+        ":enter",
+        [
+          style({ transform: "translateX(-20%)" }),
+          animate(ANIMATION, style({ transform: "translateX(0%)" }))
+        ],
+        opts
+      ),
+      query(
+        ":leave",
+        [
+          style({ transform: "translateX(0%)" }),
+          animate(ANIMATION, style({ transform: "translateX(100%)" }))
+        ],
+        opts
+      )
+    ])
+  ])
+];

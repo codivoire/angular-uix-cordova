@@ -9,4 +9,4 @@ export {
 } from "./providers/platform";
 
 // UTILS
-export { RouterTransition } from "./utils/transition";
+export { RouterTransition } from "./utils/navigation";
