@@ -22,10 +22,10 @@ If you are interested in working with us, feel free to send a message to [lambir
 
 Features
 
-- Angular v7
+- Angular v8
 - Cordova
 - Ionic Native v5
-- TypeScript v3
+- TypeScript v3.5
 - SCSS
 
 ## Installation
