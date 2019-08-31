@@ -1,0 +1,132 @@
+/* color */
+
+$magenta: #570327 !default;
+$red: #f44336 !default;
+$white: #ffffff !default;
+$black: #000000 !default;
+$dark: #323a45 !default;
+$light: #eeeeee !default;
+$green: #43a047 !default;
+$grey: #9ea7b3 !default;
+$blue: #2196f3 !default;
+$yellow: #e9b945 !default;
+$orange: #f27935 !default;
+$purple: #673ab7 !default;
+$teal: rgb(0, 150, 136) !default;
+$colorsList: (white: $white,
+  black: $black,
+  dark: $dark,
+  yellow: $yellow,
+  blue: $blue,
+  orange: $orange,
+  red: $red,
+  green: $green,
+  purple: $purple,
+  teal: $teal);
+$themeColor: $blue;
+$themeColorIos: $themeColor;
+$themeColorMd: $themeColor;
+$colors: $colorsList;
+$colorsIos: $colors;
+$colorsMd: $colors;
+/* grid system */
+
+$grid-columns: 12 !default;
+$grid-spacing: 15px !default;
+$grid-gutter: $grid-spacing !default;
+/*Container sizes */
+
+$container-sm: (720px + $grid-columns) !default;
+$container-md: (940px + $grid-columns) !default;
+$container-lg: (1140px + $grid-columns) !default;
+/* zindex */
+
+$z-index-view: 1 !default;
+$z-index-view-below: 2 !default;
+$z-index-view-above: 3 !default;
+/* border-radius */
+
+$radius-xs: 2px !default;
+$radius-sm: 3px !default;
+$radius-md: 4px !default;
+$radius-lg: 5px !default;
+/* screen devise */
+
+$screen-sm: 768px !default;
+$screen-md: 992px !default;
+$screen-lg: 1200px !default;
+
+/* vanilla css var */
+
+:root {
+  --uix-color-blue: #007aff;
+  --uix-color-magenta: #570327;
+  --uix-color-red: #f44336;
+  --uix-color-green: #43a047;
+  --uix-color-yellow: #e9b945;
+  --uix-color-teal: rgb(0, 150, 136);
+  --uix-color-purple: #673ab7;
+  --uix-color-orange: #f27935;
+  --uix-color-grey: #9ea7b3;
+  --uix-color-light: #eeeeee;
+  --uix-color-dark: #323a45;
+  --uix-theme-color: #007aff;
+  --uix-theme-color-rgb: 33, 150, 243;
+  --uix-theme-color-shade: #0c82df;
+  --uix-theme-color-tint: #48a8f5;
+  --uix-bars-bg-image: none;
+  --uix-bars-bg-color: #f7f7f8;
+  --uix-bars-bg-color-rgb: 247, 247, 248;
+  --uix-bars-border-color: #c8c7cc;
+  --uix-bars-text-color: #000;
+  --uix-bars-link-color: var(--uix-theme-color);
+  --uix-bars-shadow-bottom-image: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.08) 40%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0) 90%,
+      rgba(0, 0, 0, 0) 100%);
+  --uix-bars-shadow-top-image: linear-gradient(to top,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.08) 40%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0) 90%,
+      rgba(0, 0, 0, 0) 100%);
+
+  --uix-elevation-0: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  --uix-elevation-1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  --uix-elevation-2: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  --uix-elevation-3: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+  --uix-elevation-4: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  --uix-elevation-5: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+  --uix-elevation-6: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  --uix-elevation-7: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
+  --uix-elevation-8: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --uix-elevation-9: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12);
+  --uix-elevation-10: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);
+  --uix-elevation-11: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12);
+  --uix-elevation-12: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+  --uix-elevation-13: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12);
+  --uix-elevation-14: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12);
+  --uix-elevation-15: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12);
+  --uix-elevation-16: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+  --uix-elevation-17: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12);
+  --uix-elevation-18: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12);
+  --uix-elevation-19: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12);
+  --uix-elevation-20: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12);
+  --uix-elevation-21: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12);
+  --uix-elevation-22: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12);
+  --uix-elevation-23: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12);
+  --uix-elevation-24: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+.uix-ios {
+  --uix-bars-border-color: #c8c7cc;
+}
+
+.uix-md {
+  --uix-bars-border-color: transparent;
+}
+
+@import "vars-ios";
+@import "vars-md";

@@ -1,0 +1,32 @@
+:root {
+  --uix-link-highlight-black: rgba(0, 0, 0, 0.1);
+  --uix-link-highlight-white: rgba(255, 255, 255, 0.15);
+  --uix-link-highlight-color: var(--uix-link-highlight-black);
+}
+.uix-theme-dark {
+  --uix-link-highlight-color: var(--uix-link-highlight-white);
+}
+
+.link,
+.tab-link {
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  transform: translate3d(0, 0, 0);
+  z-index: 1;
+}
+
+.link {
+  i + span,
+  i + i,
+  span + i,
+  span + span {
+    margin-left: 4px;
+  }
+}
+
+@import "link-ios";
+@import "link-md";

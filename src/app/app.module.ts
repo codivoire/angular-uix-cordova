@@ -1,34 +1,29 @@
+import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
+import { IonicModule } from "@ionic/angular";
 
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
-import { PlatformService, RouterOutletComponent } from "../uix/core";
+import { UixModule } from "src/@uix/angular/core";
+import { CoreModule } from "./core/core.module";
 
-import { AppRoutingModule } from "./app-routing.module";
+import { AppRoutingModule, ROUTING_COMPONENTS } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
-import { HomeComponent } from "./home/home.component";
-import { AboutComponent } from "./about/about.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { SettingsComponent } from "./settings/settings.component";
-import { BackDirective } from "./back.directive";
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    BackDirective,
-    HomeComponent,
-    AboutComponent,
-    ProfileComponent,
-    SettingsComponent,
-    RouterOutletComponent
+  declarations: [AppComponent, ...ROUTING_COMPONENTS],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    IonicModule.forRoot(),
+    UixModule,
+    AppRoutingModule,
+    CoreModule
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule],
-  providers: [PlatformService, StatusBar, SplashScreen],
+  providers: [StatusBar, SplashScreen],
   bootstrap: [AppComponent],
-  exports: [BackDirective]
+  exports: []
 })
 export class AppModule {}

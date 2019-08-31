@@ -1,0 +1,52 @@
+.uix-ios {
+  --uix-navbarLeftTextOffset: calc(4px + 12px + var(--uix-navbar-inner-padding-left));
+  --uix-navbarTitleLargeOffset: var(--uix-navbar-large-title-padding-left);
+
+  uix-navbar {
+    a.icon-only {
+      width: 44px;
+      margin: 0;
+      justify-content: center;
+    }
+
+    uix-navbar-left,
+    uix-navbar-right {
+      a+a {
+        margin-left: 15px;
+      }
+    }
+
+    b {
+      font-weight: 600;
+    }
+
+    uix-navbar-left {
+      margin-right: 10px;
+    }
+
+    uix-navbar-right {
+      margin-left: 10px;
+    }
+
+    uix-navbar-right:first-child {
+      right: calc(8px + var(--uix-safe-area-right));
+    }
+  }
+
+  uix-navbar-inner {
+    justify-content: space-between;
+  }
+
+  .navbar-inner-left-title {
+    justify-content: flex-start;
+
+    uix-navbar-right {
+      margin-left: auto;
+    }
+
+    uix-navbar-title {
+      text-align: left;
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+uix-app,
+uix-view,
+uix-statusbar,
+uix-page,
+uix-page-content,
+uix-navbar,
+uix-navbar-inner,
+uix-navbar-left,
+uix-navbar-right,
+uix-navbar-title {
+  display: block;
+}
+
+uix-rating {
+  display: inline-block;
+}
+
+uix-app {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+uix-view {
+  position: relative;
+  height: 100%;
+  z-index: var(--uix-content-zindex);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.uix-ios {
+  uix-app {
+    padding-top: var(--uix-statusbar-height);
+  }
+
+  uix-view {
+    height: calc(100% - var(--uix-appbar-app-offset, 0px));
+  }
+}

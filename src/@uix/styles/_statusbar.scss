@@ -1,0 +1,46 @@
+:root {
+  --uix-statusbar-height: 0px;
+  --uix-statusbar-bg-color: var(--uix-bars-bg-color);
+}
+
+.uix-ios {
+  --uix-statusbar-height: 20px;
+}
+
+.uix-md {
+  --uix-statusbar-height: 24px;
+}
+
+.uix-ios:not(.with-statusbar),
+.uix-md:not(.with-statusbar) {
+  --uix-statusbar-height: 0px;
+}
+
+.with-statusbar {
+  .uix-root {
+    top: var(--uix-statusbar-height);
+  }
+}
+
+uix-statusbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  box-sizing: border-box;
+  display: block;
+  height: var(--uix-statusbar-height);
+}
+
+.uix-ios {
+  uix-statusbar {
+    background: var(--uix-statusbar-bg-color, var(--uix-bars-bg-color));
+  }
+}
+
+.uix-md {
+  uix-statusbar {
+    background: var(--uix-statusbar-bg-color, var(--uix-theme-color-shade));
+  }
+}

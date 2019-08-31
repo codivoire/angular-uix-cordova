@@ -1,0 +1,117 @@
+@mixin fake-shadow() {
+  position: absolute;
+  top: 0;
+  width: 16px;
+  bottom: 0;
+  z-index: -1;
+  content: "";
+  opacity: 0;
+  right: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 0.01) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+
+@mixin fake-opacity() {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  bottom: 0;
+  content: "";
+  opacity: 0;
+  z-index: 10000;
+}
+
+.uix-transition-ios {
+  @include transform(translate3d(0, 0, 0));
+  @include transition-property(transform);
+  @include transition-duration(var(--uix-page-transition-duration));
+  &:before,
+  &:after {
+    @include transition(opacity var(--uix-page-transition-duration) ease);
+  }
+  &.ng-enter {
+    z-index: $z-index-view-above;
+    pointer-events: none;
+    @include transform(translate3d(100%, 0, 0));
+    &:before {
+      @include fake-shadow();
+    }
+  }
+  &.ng-enter-active {
+    pointer-events: auto;
+    @include transform(translate3d(0, 0, 0));
+    &:before {
+      opacity: 1;
+    }
+  }
+  &.ng-leave {
+    z-index: $z-index-view-below;
+    pointer-events: none;
+    @include transform(translate3d(0, 0, 0));
+    &:after {
+      @include fake-opacity();
+    }
+  }
+  &.ng-leave-active {
+    pointer-events: none;
+    @include transform(translate3d(-20%, 0, 0));
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+.uix-transition-backward .uix-transition-ios {
+  @include transition-duration(var(--uix-page-swipeback-transition-duration));
+  &.ng-enter {
+    z-index: $z-index-view-below;
+    pointer-events: none;
+    @include transform(translate3d(-20%, 0, 0));
+    &:before {
+      all: initial;
+    }
+    &:after {
+      @include fake-opacity();
+      opacity: 1;
+    }
+  }
+  &.ng-enter-active {
+    pointer-events: auto;
+    @include transform(translate3d(0, 0, 0));
+    &:before {
+      all: initial;
+    }
+    &:after {
+      opacity: 0;
+    }
+  }
+  &.ng-leave {
+    z-index: $z-index-view-above;
+    pointer-events: none;
+    @include transform(translate3d(0, 0, 0));
+    &:before {
+      @include fake-shadow();
+      opacity: 1;
+    }
+    &:after {
+      all: initial;
+    }
+  }
+  &.ng-leave-active {
+    pointer-events: none;
+    @include transform(translate3d(100%, 0, 0));
+    &:before {
+      opacity: 0;
+    }
+    &:after {
+      all: initial;
+    }
+  }
+}

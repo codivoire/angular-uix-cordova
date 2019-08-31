@@ -1,0 +1,23 @@
+.rating {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rating li {
+  display: inline-block;
+  padding-right: 3px;
+  color: #c3c3c3;
+  font-size: 25px;
+  line-height: 1;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.rating li:hover,
+.rating li.selected {
+  color: #46B266;
+}

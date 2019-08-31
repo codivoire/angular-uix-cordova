@@ -1,23 +1,20 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { HomeComponent } from "./home/home.component";
-import { AboutComponent } from "./about/about.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { SettingsComponent } from "./settings/settings.component";
+import { HomeComponent } from "./pages/home/home.component";
+import { AboutComponent } from "./pages/about/about.component";
+import { SettingsComponent } from "./pages/settings/settings.component";
 
-export const AppRoutes: Routes = [
+export const ROUTING_COMPONENTS = [
+  HomeComponent,
+  AboutComponent,
+  SettingsComponent
+];
+
+export const APP_ROUTES: Routes = [
   {
     path: "",
     component: HomeComponent
-  },
-  {
-    path: "home",
-    component: HomeComponent
-  },
-  {
-    path: "profile",
-    component: ProfileComponent
   },
   {
     path: "about",
@@ -28,14 +25,18 @@ export const AppRoutes: Routes = [
     component: SettingsComponent
   },
   {
+    path: "account",
+    loadChildren: "src/app/pages/_account/account.module#AccountModule"
+  },
+  {
     path: "**",
-    redirectTo: "home"
+    redirectTo: ""
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(AppRoutes, {
+    RouterModule.forRoot(APP_ROUTES, {
       useHash: true
     })
   ],
