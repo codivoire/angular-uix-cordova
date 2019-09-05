@@ -15,7 +15,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
     </ul>
   `
 })
-export class RatingComponent implements OnInit {
+export class UixRating implements OnInit {
   @Input() rateValue: number;
   @Output() rate = new EventEmitter<number>();
 

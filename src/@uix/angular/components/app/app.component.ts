@@ -6,4 +6,4 @@ import { Component } from "@angular/core";
     <ng-content></ng-content>
   `
 })
-export class AppComponent {}
+export class UixApp {}

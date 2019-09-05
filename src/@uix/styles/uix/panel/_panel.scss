@@ -1,64 +1,274 @@
-$sidenav-width: 280px;
-$sidenav-zindex: 200;
-.uix-sidenav-backdrop {
+:root {
+  --uix-panel-width: 260px;
+  --uix-panel-left-width: var(--uix-panel-width);
+  --uix-panel-right-width: var(--uix-panel-width);
+  --uix-panel-bg-color: #fff;
+  --uix-panel-cover-zindex: 6000;
+  --uix-panel-reveal-zindex: 99;
+}
+
+.uix-ios {
+  --uix-panel-backdrop-bg-color: rgba(0, 0, 0, 0);
+  --uix-panel-transition-duration: 400ms;
+  --uix-panel-shadow: transparent;
+}
+
+.uix-md {
+  --uix-panel-backdrop-bg-color: rgba(0, 0, 0, 0.2);
+  --uix-panel-transition-duration: 300ms;
+  --uix-panel-shadow: rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.1) 30%,
+    rgba(0, 0, 0, 0.05) 40%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0) 100%;
+}
+
+.panel-backdrop {
+  position: absolute;
+  left: 0;
+  top: calc(var(--uix-statusbar-height) + var(--uix-appbar-app-offset, 0px));
+  width: 100%;
+  height: calc(100% - var(--uix-statusbar-height) - var(--uix-appbar-app-offset, 0px));
+  opacity: 0;
+  z-index: 999;
+  display: none;
+  transform: translate3d(0, 0, 0);
+  background-color: var(--uix-panel-backdrop-bg-color);
+  transition-duration: var(--uix-panel-transition-duration);
+  will-change: transform, opacity;
+
+  &.not-animated {
+    transition-duration: 0ms !important;
+  }
+}
+
+.panel {
+  z-index: 1000;
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(var(--uix-statusbar-height) + var(--uix-appbar-app-offset, 0px));
+  height: calc(100% - var(--uix-statusbar-height) - var(--uix-appbar-app-offset, 0px));
+  transform: translate3d(0, 0, 0);
+  width: var(--uix-panel-width);
+  background-color: var(--uix-panel-bg-color);
+  overflow: visible;
+  will-change: transform;
+  transition-property: transform;
+
+  &:after {
+    pointer-events: none;
+    opacity: 0;
+    z-index: 5999;
     position: absolute;
+    content: '';
+    top: 0;
+    width: 20px;
+    height: 100%;
+    transition-property: transform, opacity;
+  }
+
+  &,
+  &:after {
+    transition-duration: var(--uix-panel-transition-duration);
+  }
+
+  &.not-animated {
+
+    &,
+    &:after {
+      transition-duration: 0ms !important;
+    }
+  }
+
+  &.panel-reveal.not-animated {
+
+    &~.views,
+    &~.view {
+      transition-duration: 0ms !important;
+    }
+  }
+
+  &.panel-resizing {
+    user-select: none;
+
+    &,
+    &:after,
+    &~.views,
+    &~.view {
+      transition-duration: 0ms !important;
+    }
+  }
+}
+
+.panel-cover {
+  z-index: 6000;
+}
+
+.panel-left {
+  left: 0;
+  width: var(--uix-panel-left-width, var(--uix-panel-width));
+
+  &.panel-cover {
+    transform: translate3d(-100%, 0, 0);
+
+    &:after {
+      left: 100%;
+      background: linear-gradient(to right, var(--uix-panel-shadow));
+
+      html.with-panel-left-cover & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.panel-reveal {
+    &:after {
+      right: 0;
+      transform: translate3d(calc(-1 * var(--uix-panel-left-width, var(--uix-panel-width))), 0, 0);
+      background: linear-gradient(to left, var(--uix-panel-shadow));
+
+      html.with-panel-left-reveal & {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}
+
+.panel-right {
+  right: 0;
+  width: var(--uix-panel-right-width, var(--uix-panel-width));
+
+  &.panel-cover {
+    transform: translate3d(100%, 0, 0);
+
+    &:after {
+      right: 100%;
+      background: linear-gradient(to left, var(--uix-panel-shadow));
+
+      html.with-panel-right-cover & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.panel-reveal {
+    &:after {
+      left: 0;
+      background: linear-gradient(to right, var(--uix-panel-shadow));
+      transform: translate3d(var(--uix-panel-right-width, var(--uix-panel-width)), 0, 0);
+
+      html.with-panel-right-reveal & {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}
+
+.panel-visible-by-breakpoint {
+  display: block;
+  transform: translate3d(0, 0, 0) !important;
+
+  &:after {
+    display: none;
+  }
+
+  &.panel-cover {
+    z-index: 5900;
+  }
+}
+
+html {
+
+  &.with-panel {
+
+    .framework7-root>.views,
+    .framework7-root>.view {
+      .page-content {
+        @include not-scrollable();
+      }
+    }
+  }
+
+  &.with-panel-left-cover,
+  &.with-panel-right-cover {
+    .panel-backdrop {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  &.with-panel-left-reveal,
+  &.with-panel-right-reveal {
+    .panel-backdrop {
+      background: rgba(0, 0, 0, 0);
+      display: block;
+      opacity: 0;
+    }
+  }
+
+  &.with-panel-left-reveal {
+
+    .views,
+    .framework7-root>.view,
+    .panel-backdrop {
+      transform: translate3d(var(--uix-panel-left-width, var(--uix-panel-width)), 0, 0);
+    }
+  }
+
+  &.with-panel-right-reveal {
+
+    .views,
+    .framework7-root>.view,
+    .panel-backdrop {
+      transform: translate3d(calc(-1 * var(--uix-panel-right-width, var(--uix-panel-width))), 0, 0);
+    }
+  }
+
+  &.with-panel-left-cover {
+    .panel-left {
+      transform: translate3d(0px, 0, 0);
+    }
+  }
+
+  &.with-panel-right-cover {
+    .panel-right {
+      transform: translate3d(0px, 0, 0);
+    }
+  }
+}
+
+.panel-resize-handler {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  cursor: col-resize;
+  z-index: 6000;
+  display: none;
+
+  .panel-resizable & {
     display: block;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: $sidenav-zindex - 1;
-    @include opacity(1);
-    @include transform(translate3d(0, 0, 0));
-}
+  }
 
-.uix-sidenav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: $sidenav-width;
-    height: 100%;
-    background-color: $white;
-    z-index: $sidenav-zindex;
-    @include transform(translate3d(-$sidenav-width, 0, 0));
-    @include transition( transform 400ms ease, box-shadow 400ms ease);
-    &.uix-sidenav-left {
-        @include transform(translate3d(-$sidenav-width, 0, 0));
-    }
-    &.uix-sidenav-right {
-        left: initial;
-        right: 0;
-        @include transform(translate3d($sidenav-width, 0, 0));
-    }
-    &.uix-sidenav-reveal {
-        &~.uix-view,
-        &~.uix-views .uix-view,
-        &~.uix-pages .uix-view {}
-    }
-    &.open {
-        &.uix-sidenav-left {
-            @include transform(translate3d(0, 0, 0));
-        }
-        &.uix-sidenav-right {
-            @include transform(translate3d(0, 0, 0));
-            &.uix-sidenav-reveal {
-                &~.uix-view,
-                &~.uix-views .uix-view,
-                &~.uix-pages .uix-view {
-                    @include transform(translate3d(-$sidenav-width, 0, 0));
-                }
-            }
-        }
-        &.uix-sidenav-reveal {
-            &~.uix-view,
-            &~.uix-views .uix-view,
-            &~.uix-pages .uix-view {
-                @include transform(translate3d($sidenav-width, 0, 0));
-            }
-        }
-    }
-}
+  .panel-left.panel-cover & {
+    right: -3px;
+  }
 
+  .panel-left.panel-reveal & {
+    right: 0;
+  }
+
+  .panel-right.panel-cover & {
+    left: -3px;
+  }
+
+  .panel-right.panel-reveal & {
+    left: 0;
+  }
+}
 
 @import "panel-ios";
 @import "panel-md";

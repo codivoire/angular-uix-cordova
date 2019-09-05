@@ -7,7 +7,7 @@ import { Location } from "@angular/common";
 export class BackDirective {
   constructor(private location: Location) {}
 
-  @HostListener("click", ["$event"]) applyBackgroundColor(event: MouseEvent) {
+  @HostListener("click", ["$event"]) onClick(event: MouseEvent) {
     this.location.back();
   }
 }

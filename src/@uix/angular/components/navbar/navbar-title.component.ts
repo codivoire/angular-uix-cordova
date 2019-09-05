@@ -6,4 +6,4 @@ import { Component } from "@angular/core";
     <ng-content></ng-content>
   `
 })
-export class NavbarTitleComponent {}
+export class UixNavbarTitle {}

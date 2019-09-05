@@ -37,8 +37,8 @@ export const routeList: Routes = [
     UixModule
   ],
   providers: [],
-  exports: AccountModule.COMPONENT_LIST,
-  declarations: AccountModule.COMPONENT_LIST
+  declarations: AccountModule.COMPONENT_LIST,
+  exports: AccountModule.COMPONENT_LIST
 })
 export class AccountModule {
   static readonly COMPONENT_LIST = [LoginComponent, ProfileComponent];

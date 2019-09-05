@@ -19,7 +19,7 @@ import Support from "../../utils/support";
   `,
   animations: [RouterTransition]
 })
-export class ViewComponent {
+export class UixView {
   private historyQueue: NavigationStart[] = [];
   private animationNumber = 0;
   private lastRoute: NavigationStart;

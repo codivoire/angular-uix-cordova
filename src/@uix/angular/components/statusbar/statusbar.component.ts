@@ -15,7 +15,7 @@ import { StatusbarProvider } from "src/@uix/angular/providers/statusbar";
     <ng-content></ng-content>
   `
 })
-export class StatusbarComponent implements OnInit, OnDestroy, AfterViewInit {
+export class UixStatusbar implements OnInit, OnDestroy, AfterViewInit {
   private subscriptions: Subscription[] = [];
 
   constructor(

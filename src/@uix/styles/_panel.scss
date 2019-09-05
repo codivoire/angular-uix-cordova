@@ -1,0 +1,220 @@
+uix-panel-backdrop {
+  position: absolute;
+  left: 0;
+  top: calc(var(--uix-statusbar-height) + var(--uix-appbar-app-offset, 0px));
+  width: 100%;
+  height: calc(100% - var(--uix-statusbar-height) - var(--uix-appbar-app-offset, 0px));
+  opacity: 0;
+  z-index: 999;
+  display: none;
+  transform: translate3d(0, 0, 0);
+  background-color: var(--uix-panel-backdrop-bg-color);
+  transition-duration: var(--uix-panel-transition-duration);
+  will-change: transform, opacity;
+
+  &[not-animated] {
+    transition-duration: 0ms !important;
+  }
+}
+
+uix-panel {
+  z-index: 1000;
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(var(--uix-statusbar-height) + var(--uix-appbar-app-offset, 0px));
+  height: calc(100% - var(--uix-statusbar-height) - var(--uix-appbar-app-offset, 0px));
+  width: var(--uix-panel-width);
+  background-color: var(--uix-panel-bg-color);
+  overflow: visible;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  transition-property: transform;
+  transition-duration: var(--uix-panel-transition-duration);
+
+  &:after {
+    pointer-events: none;
+    opacity: 0;
+    z-index: 5999;
+    position: absolute;
+    content: '';
+    top: 0;
+    width: 20px;
+    height: 100%;
+    transition-property: transform, opacity;
+  }
+
+  &,
+  &:after {
+    transition-duration: var(--uix-panel-transition-duration);
+  }
+
+  &[active] {
+    display: block;
+  }
+
+  &[not-animated] {
+
+    &,
+    &:after {
+      transition-duration: 0ms !important;
+    }
+  }
+
+  &[resizing] {
+    user-select: none;
+  }
+}
+
+uix-panel[cover] {
+  z-index: var(--uix-panel-cover-zindex);
+}
+
+uix-panel[reveal] {
+  z-index: var(--uix-panel-reveal-zindex);
+}
+
+uix-panel[left] {
+  left: 0;
+  width: var(--uix-panel-left-width, var(--uix-panel-width));
+
+  &[cover] {
+    transform: translate3d(-100%, 0, 0);
+
+    &:after {
+      left: 100%;
+      background: linear-gradient(to right, var(--uix-panel-shadow));
+
+      html.with-panel-left-cover & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &[reveal] {
+    &:after {
+      right: 0;
+      transform: translate3d(calc(-1 * var(--uix-panel-left-width, var(--uix-panel-width))), 0, 0);
+      background: linear-gradient(to left, var(--uix-panel-shadow));
+
+      html.with-panel-left-reveal & {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}
+
+uix-panel[right] {
+  right: 0;
+  width: var(--uix-panel-right-width, var(--uix-panel-width));
+
+  &[cover] {
+    transform: translate3d(100%, 0, 0);
+
+    &:after {
+      right: 100%;
+      background: linear-gradient(to left, var(--uix-panel-shadow));
+
+      html.with-panel-right-cover & {
+        opacity: 1;
+      }
+    }
+  }
+
+  &[reveal] {
+    &:after {
+      left: 0;
+      background: linear-gradient(to right, var(--uix-panel-shadow));
+      transform: translate3d(var(--uix-panel-right-width, var(--uix-panel-width)), 0, 0);
+
+      html.with-panel-right-reveal & {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}
+
+html {
+  &.with-panel {
+
+    uix-app uix-view {
+      transition-duration: var(--uix-panel-transition-duration);
+      transition-property: transform;
+
+      uix-page-content {
+        @include not-scrollable();
+      }
+    }
+  }
+
+  &.with-panel-left-cover,
+  &.with-panel-right-cover {
+    uix-panel-backdrop {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  &.with-panel-left-reveal,
+  &.with-panel-right-reveal {
+    uix-app uix-panel-backdrop {
+      background: rgba(0, 0, 0, 0);
+      display: block;
+      opacity: 0;
+    }
+  }
+
+  &.with-panel-left-reveal {
+
+    uix-view,
+    uix-panel-backdrop {
+      transform: translate3d(var(--uix-panel-left-width, var(--uix-panel-width)), 0, 0);
+    }
+  }
+
+  &.with-panel-right-reveal {
+
+    uix-app uix-view,
+    uix-app uix-panel-backdrop {
+      transform: translate3d(calc(-1 * var(--uix-panel-right-width, var(--uix-panel-width))), 0, 0);
+    }
+  }
+
+  &.with-panel-left-cover {
+    uix-panel[left] {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &.with-panel-right-cover {
+    uix-panel[right] {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+.uix-ios {
+
+  uix-panel[left],
+  uix-panel[right] {
+    &:after {
+      content: '';
+      height: 100%;
+      width: 1px;
+      position: absolute;
+      top: 0;
+      background: #ddd;
+      z-index: 1000;
+    }
+  }
+
+  uix-panel[left]:after {
+    right: 0;
+  }
+
+  uix-panel[right]:after {
+    left: 0;
+  }
+}

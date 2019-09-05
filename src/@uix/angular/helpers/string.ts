@@ -603,4 +603,18 @@ export namespace HelperString {
       .replace(/^-+/, "") // trim - from start of text
       .replace(/-+$/, "");
   }
+
+  export function uniqueID(
+    length = 8,
+    startLettersAscii = 97,
+    alphabetLength = 26
+  ) {
+    const id = [...new Array(length)]
+      .map(() =>
+        String.fromCharCode(startLettersAscii + Math.random() * alphabetLength)
+      )
+      .join("");
+
+    return id;
+  }
 }

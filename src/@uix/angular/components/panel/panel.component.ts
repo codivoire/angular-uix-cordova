@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "uix-navbar-right",
+  selector: "uix-panel",
   template: `
     <ng-content></ng-content>
   `
 })
-export class UixNavbarRight {}
+export class UixPanel {}

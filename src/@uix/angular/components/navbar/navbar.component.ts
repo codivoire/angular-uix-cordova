@@ -8,4 +8,4 @@ import { Component } from "@angular/core";
     </uix-navbar-inner>
   `
 })
-export class NavbarComponent {}
+export class UixNavbar {}

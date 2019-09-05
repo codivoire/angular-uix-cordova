@@ -1,16 +1,18 @@
 <uix-page>
   <uix-navbar>
     <uix-navbar-left>
-      <a uix-panel-open="left" class="link icon-only">
-        <i class="icon-ios-menu"></i>
+      <a uix-panel-left-open class="link icon-only">
+        <i class="icon-ios-menu ios-only"></i>
+        <i class="icon-md-menu md-only"></i>
       </a>
     </uix-navbar-left>
     <uix-navbar-title>
       <span>{{ title }}</span>
     </uix-navbar-title>
     <uix-navbar-right>
-      <a routerLink="/profile" class="link icon-only">
-        <i class="icon-ios-contact"></i>
+      <a uix-panel-right-open class="link icon-only">
+        <i class="icon-ios-information-circle-outline ios-only"></i>
+        <i class="icon-md-information-circle-outline md-only"></i>
       </a>
     </uix-navbar-right>
   </uix-navbar>

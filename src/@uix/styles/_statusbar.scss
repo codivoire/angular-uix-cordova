@@ -1,27 +1,3 @@
-:root {
-  --uix-statusbar-height: 0px;
-  --uix-statusbar-bg-color: var(--uix-bars-bg-color);
-}
-
-.uix-ios {
-  --uix-statusbar-height: 20px;
-}
-
-.uix-md {
-  --uix-statusbar-height: 24px;
-}
-
-.uix-ios:not(.with-statusbar),
-.uix-md:not(.with-statusbar) {
-  --uix-statusbar-height: 0px;
-}
-
-.with-statusbar {
-  .uix-root {
-    top: var(--uix-statusbar-height);
-  }
-}
-
 uix-statusbar {
   position: absolute;
   left: 0;
