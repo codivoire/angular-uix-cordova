@@ -1,18 +1,17 @@
 <uix-page>
   <uix-navbar>
     <uix-navbar-left>
-      <a uix-back class="link back">
-        <i class="icon-back"></i>
-        <span class="ios-only">Back</span>
-      </a>
+      <uix-icon-back>Back</uix-icon-back>
     </uix-navbar-left>
-    <uix-navbar-title><span>{{ title }}</span></uix-navbar-title>
+    <uix-navbar-title>
+      <span>{{ title }}</span>
+    </uix-navbar-title>
     <uix-navbar-right></uix-navbar-right>
   </uix-navbar>
 
   <uix-page-content>
-    <div class="block-title">Content title</div>
-    <div class="block block-strong">
+    <uix-block-title>Content title</uix-block-title>
+    <uix-block strong>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
         obcaecati itaque ad iste numquam, sapiente doloribus corporis! Et
@@ -25,15 +24,15 @@
         dolores esse, culpa neque nihil aspernatur nisi hic veniam, quae
         consequatur dolorum.
       </p>
-    </div>
-    <div class="block-title">Other content</div>
-    <div class="block block-strong">
+    </uix-block>
+    <uix-block-title>Other content</uix-block-title>
+    <uix-block strong>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
         obcaecati itaque ad iste numquam, sapiente doloribus corporis! Et
         dolores esse, culpa neque nihil aspernatur nisi hic veniam, quae
         consequatur dolorum.
       </p>
-    </div>
+    </uix-block>
   </uix-page-content>
 </uix-page>

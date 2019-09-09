@@ -21,6 +21,13 @@ import { UixNavbarInner } from "./components/navbar/navbar-inner.component";
 import { UixNavbarLeft } from "./components/navbar/navbar-left.component";
 import { UixNavbarRight } from "./components/navbar/navbar-right.component";
 import { UixNavbarTitle } from "./components/navbar/navbar-title.component";
+import { UixIcon } from "./components/icon/icon.component";
+import { UixIconBack } from "./components/icon/icon-black.component";
+import { UixLink } from "./components/link/link.component";
+import { UixBlock } from "./components/block/block.component";
+import { UixBlockTitle } from "./components/block/block-title.component";
+import { UixBlockHeader } from "./components/block/block-header.component";
+import { UixBlockFooter } from "./components/block/block-footer.component";
 import { UixRating } from "./components/rating/rating.component";
 
 import { PanelProvider } from "./providers/panel";
@@ -40,6 +47,7 @@ const PROVIDERS = [PanelProvider, StatusbarProvider, PlatformProvider];
 
 const DECLARATIONS = [
   ...DIRECTIVES,
+  UixRating,
   UixApp,
   UixView,
   UixStatusbar,
@@ -52,7 +60,13 @@ const DECLARATIONS = [
   UixNavbarLeft,
   UixNavbarRight,
   UixNavbarTitle,
-  UixRating
+  UixBlock,
+  UixBlockTitle,
+  UixBlockHeader,
+  UixBlockFooter,
+  UixLink,
+  UixIcon,
+  UixIconBack
 ];
 
 @NgModule({

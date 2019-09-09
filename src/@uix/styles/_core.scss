@@ -7,10 +7,19 @@ uix-navbar,
 uix-navbar-inner,
 uix-navbar-left,
 uix-navbar-right,
-uix-navbar-title {
+uix-navbar-title,
+uix-block,
+uix-block-title,
+uix-block-header,
+uix-block-footer,
+uix-button,
+uix-input {
   display: block;
 }
 
+uix-icon,
+uix-link,
+uix-icon-back,
 uix-rating {
   display: inline-block;
 }
