@@ -1,4 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject, NgZone } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { Subject } from "rxjs";
+
+import { readQueryParam, proxyEvent } from "../utils/functions";
+import { BackButtonEmitter, BackButtonEventDetail } from "../utils/interface";
+import { getPlatforms, Platforms, isPlatform } from "../utils/platform";
 
 @Injectable({
   providedIn: "root"
@@ -19,480 +25,248 @@ export class PlatformProvider {
   isReady: boolean;
   hasBackButtonHandler: boolean;
 
-  IOS: string;
-  ANDROID: string;
-  WINDOWS_PHONE: string;
-  EDGE: string;
-  CROSSWALK: string;
+  private _readyPromise: Promise<string>;
+  private win: any;
 
-  constructor() {
-    this.heightCached = window.innerHeight;
-    this.widthCached = window.innerWidth;
-    this.navigator = window.navigator;
-    this.userAgent = this.navigator.userAgent;
+  /**
+   * @hidden
+   */
+  backButton: BackButtonEmitter = new Subject<BackButtonEventDetail>() as any;
 
-    this.platformName = ""; // just the name, like iOS or Android
-    this.platformVersion = 0; // a float of the major and minor, like 7.1
-    this.readyCallbacks = [];
-    this.backButtonActions = {};
-    this.nextId = 0;
-    this.windowLoadListenderAttached = false;
-    this.platformReadyTimer = 2000;
+  /**
+   * The pause event emits when the native platform puts the application
+   * into the background, typically when the user switches to a different
+   * application. This event would emit when a Cordova app is put into
+   * the background, however, it would not fire on a standard web browser.
+   */
+  pause = new Subject<void>();
 
-    this.isReady = false;
+  /**
+   * The resume event emits when the native platform pulls the application
+   * out from the background. This event would emit when a Cordova app comes
+   * out from the background, however, it would not fire on a standard web browser.
+   */
+  resume = new Subject<void>();
 
-    this.IOS = "ios";
-    this.ANDROID = "android";
-    this.WINDOWS_PHONE = "windowsphone";
-    this.EDGE = "edge";
-    this.CROSSWALK = "crosswalk";
+  /**
+   * The resize event emits when the browser window has changed dimensions. This
+   * could be from a browser window being physically resized, or from a device
+   * changing orientation.
+   */
+  resize = new Subject<void>();
 
-    if (document.readyState === "complete") {
-      this.onWindowLoad();
-    } else {
-      this.windowLoadListenderAttached = true;
-      window.addEventListener("load", () => this.onWindowLoad(), false);
-    }
+  IOS = "ios";
+  ANDROID = "android";
+  WINDOWS_PHONE = "windowsphone";
+  EDGE = "edge";
+  CROSSWALK = "crosswalk";
+  CORDOVA = "cordova";
+
+  constructor(@Inject(DOCUMENT) private doc: any, zone: NgZone) {
+    zone.run(() => {
+      this.win = doc.defaultView;
+      this.backButton.subscribeWithPriority = function(priority, callback) {
+        return this.subscribe(ev =>
+          ev.register(priority, () => zone.run(callback))
+        );
+      };
+
+      proxyEvent(this.pause, doc, "pause");
+      proxyEvent(this.resume, doc, "resume");
+      proxyEvent(this.backButton, doc, "ionBackButton");
+      proxyEvent(this.resize, this.win, "resize");
+
+      let readyResolve: (value: string) => void;
+      this._readyPromise = new Promise(res => {
+        readyResolve = res;
+      });
+      if (this.win && this.win["cordova"]) {
+        doc.addEventListener(
+          "deviceready",
+          () => {
+            readyResolve("cordova");
+          },
+          { once: true }
+        );
+      } else {
+        readyResolve!("dom");
+      }
+    });
   }
 
   /**
    * Get the userAgent of the platform’s
-   *
-   * @returns {string} What User Agent is.
    */
   ua(): string {
-    return this.userAgent;
+    return this.win.navigator.userAgent;
   }
 
   /**
-   * Return the current device (given by cordova).
-   *
-   * @returns {object} The device object.
-   */
-  device(): any {
-    return window.device || {};
-  }
-
-  /**
-   * Return the name of the current platform.
-   *
-   * @returns {string} The name of the current platform.
-   */
-  name(): string {
-    // singleton to get the platform name
-    if (this.platformName === null) {
-      this.setPlatform(this.device().platform);
-    }
-
-    return this.platformName;
-  }
-
-  /**
-   * Return the version of the current device platform.
-   *
-   * @returns {number} The version of the current device platform.
-   */
-  version(): number {
-    if (this.platformVersion === null) {
-      this.setVersion(this.device().version);
-    }
-
-    return this.platformVersion;
-  }
-
-  /**
-   * Gets the height of the platform’s viewport using window.innerHeight.
-   * Using this method is preferred since the dimension is a cached value,
-   * which reduces the chance of multiple and expensive DOM reads.
-   *
-   * @returns {number}
-   */
-  height(): number {
-    return this.heightCached;
-  }
-
-  /**
-   * Gets the width of the platform’s viewport using window.innerWidth.
-   * Using this method is preferred since the dimension is a cached value,
-   * which reduces the chance of multiple and expensive DOM reads.
-   *
-   * @returns {number}
-   */
-  width(): number {
-    return this.widthCached;
-  }
-
-  /**
-   * Returns true if the app is in landscape mode.
-   *
-   * @returns {boolean}
+   * Returns `true` if the app is in landscape mode.
    */
   isLandscape(): boolean {
-    if (
-      screen.orientation &&
-      Object.prototype.hasOwnProperty.call(window, "onorientationchange")
-    ) {
-      return screen.orientation.type.includes("landscape");
-    }
-
-    return window.innerHeight / window.innerWidth < 1;
+    return !this.isPortrait();
   }
 
   /**
-   * Returns true if the app is in portait mode.
-   *
-   * @returns {boolean}
+   * Returns `true` if the app is in portait mode.
    */
   isPortrait(): boolean {
-    if (
-      screen.orientation &&
-      Object.prototype.hasOwnProperty.call(window, "onorientationchange")
-    ) {
-      return screen.orientation.type.includes("portrait");
-    }
+    return (
+      this.win.matchMedia &&
+      this.win.matchMedia("(orientation: portrait)").matches
+    );
+  }
 
-    return window.innerHeight / window.innerWidth > 1;
+  testUserAgent(expression: string): boolean {
+    const nav = this.win.navigator;
+    return !!(nav && nav.userAgent && nav.userAgent.indexOf(expression) >= 0);
   }
 
   /**
-   * Depending on the platform the user is on, is(platformName) will return true or false.
-   * Note that the same app can return true for more than one platform name.
-   * For example, an app running from an iPad would return true for the platform names:
-   * mobile, ios, ipad, and tablet. Additionally, if the app was running from Cordova then
-   * cordova would be true, and if it was running from a web browser on the iPad then
-   * mobileweb would be true.
-   *
-   * @param {string} needle The platform name
-   * @returns {boolean} true/false based on platform.
+   * Get the current url.
    */
-  is(needle: string): boolean {
-    const detect: any = this.detect();
-
-    if (needle === "cordova") {
-      return typeof window.cordova !== "undefined";
-    }
-
-    if (needle === "webview") {
-      return detect.isWebView();
-    }
-
-    if (needle === "desktop") {
-      return !detect.tablet() && !detect.mobile();
-    }
-
-    if (needle === "tablet") {
-      return detect.tablet();
-    }
-
-    if (needle === "mobile") {
-      return detect.mobile();
-    }
-
-    if (needle === "ios") {
-      return detect.ios();
-    }
-
-    if (needle === "iphone") {
-      return detect.iphone();
-    }
-
-    if (needle === "ipod") {
-      return detect.ipod();
-    }
-
-    if (needle === "ipad") {
-      return detect.ipad();
-    }
-
-    if (needle === "android") {
-      return detect.android();
-    }
-
-    if (needle === "windows") {
-      return detect.windows();
-    }
+  url() {
+    return this.win.location.href;
   }
 
   /**
-   * Event fires when the platform is ready and native functionality can be called.
-   * If the app is running from within a web browser, then the promise will resolve when the DOM is ready.
-   * When the app is running from an application engine such as Cordova,
-   * then the promise will resolve when Cordova triggers the deviceready event.
-   *
-   * @param {function} fn
+   * Gets the width of the platform's viewport using `window.innerWidth`.
    */
-  ready(fn: (e?: Event) => void): void {
-    this.isReady ? fn() : this.readyCallbacks.push(fn);
+  width() {
+    return this.win.innerWidth;
   }
 
   /**
-   * Add Cordova event listeners, such as `pause`, `resume`, `volumedownbutton`, `batterylow`, `offline`, etc.
-   * More information about available event types can be found in
-   * [Cordova's event documentation](https://cordova.apache.org/docs/en/latest/cordova/events/events.html).
-   *
-   * @param {string} type Cordova [event type](https://cordova.apache.org/docs/en/latest/cordova/events/events.html).
-   * @param {function} fn Called when the Cordova event is fired.
-   * @returns {function} Returns a deregistration function to remove the event listener.
+   * Gets the height of the platform's viewport using `window.innerHeight`.
    */
-  on(type: string, fn: (e?: Event) => void): any {
-    this.ready(() => {
-      document.addEventListener(type, fn, false);
-    });
-
-    return () => {
-      this.ready(() => {
-        document.removeEventListener(type, fn);
-      });
-    };
+  height(): number {
+    return this.win.innerHeight;
   }
 
   /**
-   * The back button event is triggered when the user presses the native platform’s back button,
-   * also referred to as the “hardware” back button. This event is only used within Cordova apps
-   * running on Android and Windows platforms. This event is not fired on iOS since iOS
-   * doesn’t come with a hardware back button in the same sense an Android or Windows device does.
+   * @returns returns true/false based on platform.
+   * @description
+   * Depending on the platform the user is on, `is(platformName)` will
+   * return `true` or `false`. Note that the same app can return `true`
+   * for more than one platform name. For example, an app running from
+   * an iPad would return `true` for the platform names: `mobile`,
+   * `ios`, `ipad`, and `tablet`. Additionally, if the app was running
+   * from Cordova then `cordova` would be true, and if it was running
+   * from a web browser on the iPad then `mobileweb` would be `true`.
    *
-   * @param {function} fn Called when the back button is pressed, if this listener is the highest priority.
-   * @param {number} priority Only the highest priority will execute.
-   * @param {*=} actionId The id to assign this action. Default: a random unique id.
-   * @returns {function} A function that, when called, will deregister this backButtonAction.
+   * ```
+   * import { Platform } from 'ionic-angular';
+   *
+   * @Component({...})
+   * export MyPage {
+   *   constructor(public platform: Platform) {
+   *     if (this.platform.is('ios')) {
+   *       // This will only print when on iOS
+   *       console.log('I am an iOS device!');
+   *     }
+   *   }
+   * }
+   * ```
+   *
+   * | Platform Name   | Description                        |
+   * |-----------------|------------------------------------|
+   * | android         | on a device running Android.       |
+   * | cordova         | on a device running Cordova.       |
+   * | ios             | on a device running iOS.           |
+   * | ipad            | on an iPad device.                 |
+   * | iphone          | on an iPhone device.               |
+   * | phablet         | on a phablet device.               |
+   * | tablet          | on a tablet device.                |
+   * | electron        | in Electron on a desktop device.   |
+   * | pwa             | as a PWA app.                      |
+   * | mobile          | on a mobile device.                |
+   * | mobileweb       | on a mobile device in a browser.   |
+   * | desktop         | on a desktop device.               |
+   * | hybrid          | is a cordova or capacitor app.     |
+   *
    */
-  registerBackButtonAction(
-    fn: (e?: Event) => void,
-    priority: number,
-    actionId?: string
-  ): any {
-    if (!this.hasBackButtonHandler) {
-      this.backButtonActions = {};
-
-      this.onHardwareBackButton((e: Event) => {
-        let priorityAction, actionId;
-
-        for (actionId in this.backButtonActions) {
-          if (
-            !priorityAction ||
-            this.backButtonActions[actionId].priority >= priorityAction.priority
-          ) {
-            priorityAction = this.backButtonActions[actionId];
-          }
-        }
-
-        if (priorityAction) {
-          priorityAction.fn(e);
-          return priorityAction;
-        }
-      });
-
-      this.hasBackButtonHandler = true;
-    }
-
-    const action = {
-      id: actionId ? actionId : this.nextUid(),
-      priority: priority ? priority : 0,
-      fn: fn
-    };
-
-    this.backButtonActions[action.id] = action;
-
-    // return a function to de-register this back button action
-    return () => {
-      delete this.backButtonActions[action.id];
-    };
+  is(platformName: Platforms): boolean {
+    return isPlatform(this.win, platformName);
   }
 
   /**
-   * Some platforms have a hardware back button, so this is one way to bind to it.
+   * @returns the array of platforms
+   * @description
+   * Depending on what device you are on, `platforms` can return multiple values.
+   * Each possible value is a hierarchy of platforms. For example, on an iPhone,
+   * it would return `mobile`, `ios`, and `iphone`.
    *
-   * @param {function} callback the callback to trigger when this event occurs
+   * ```
+   * import { Platform } from 'ionic-angular';
+   *
+   * @Component({...})
+   * export MyPage {
+   *   constructor(public platform: Platform) {
+   *     // This will print an array of the current platforms
+   *     console.log(this.platform.platforms());
+   *   }
+   * }
+   * ```
    */
-  onHardwareBackButton(fn: (e: Event) => void): void {
-    this.ready(() => {
-      document.addEventListener("backbutton", fn, false);
-    });
+  platforms(): string[] {
+    return getPlatforms(this.win);
   }
 
   /**
-   * Remove an event listener for the backbutton.
+   * Returns a promise when the platform is ready and native functionality
+   * can be called. If the app is running from within a web browser, then
+   * the promise will resolve when the DOM is ready. When the app is running
+   * from an application engine such as Cordova, then the promise will
+   * resolve when Cordova triggers the `deviceready` event.
    *
-   * @param {function} callback The listener function that was originally bound.
+   * The resolved value is the `readySource`, which states which platform
+   * ready was used. For example, when Cordova is ready, the resolved ready
+   * source is `cordova`. The default ready source value will be `dom`. The
+   * `readySource` is useful if different logic should run depending on the
+   * platform the app is running from. For example, only Cordova can execute
+   * the status bar plugin, so the web should not run status bar plugin logic.
+   *
+   * ```
+   * import { Component } from '@angular/core';
+   * import { Platform } from 'ionic-angular';
+   *
+   * @Component({...})
+   * export MyApp {
+   *   constructor(public platform: Platform) {
+   *     this.platform.ready().then((readySource) => {
+   *       console.log('Platform ready from', readySource);
+   *       // Platform now ready, execute any required native code
+   *     });
+   *   }
+   * }
+   * ```
    */
-  offHardwareBackButton(fn: (e: Event) => void): void {
-    this.ready(() => {
-      document.removeEventListener("backbutton", fn);
-    });
+  ready(): Promise<string> {
+    return this._readyPromise;
+  }
+
+  /**
+   * Returns if this app is using right-to-left language direction or not.
+   * We recommend the app's `index.html` file already has the correct `dir`
+   * attribute value set, such as `<html dir="ltr">` or `<html dir="rtl">`.
+   * [W3C: Structural markup and right-to-left text in HTML](http://www.w3.org/International/questions/qa-html-dir)
+   */
+  get isRTL(): boolean {
+    return this.doc.dir === "rtl";
+  }
+
+  /**
+   * Get the query string parameter
+   */
+  getQueryParam(key: string): string | null {
+    return readQueryParam(this.win.location.href, key);
   }
 
   /**
    * Close an app on Android or Windows
-   *
-   * @name Platform#exitApp
    */
   exitApp(): void {
-    this.ready(() => {
-      navigator.app && navigator.app.exitApp && navigator.app.exitApp();
-    });
-  }
-
-  private setPlatform(n: any): void {
-    if (typeof n !== "undefined" && n !== null && n.length) {
-      this.platformName = n.toLowerCase();
-    } else if (this.userAgent.indexOf("Edge") > -1) {
-      this.platformName = this.EDGE;
-    } else if (this.userAgent.indexOf("Windows Phone") > -1) {
-      this.platformName = this.WINDOWS_PHONE;
-    } else if (this.userAgent.indexOf("Android") > 0) {
-      this.platformName = this.ANDROID;
-    } else if (/iPhone|iPad|iPod/.test(this.userAgent)) {
-      this.platformName = this.IOS;
-    } else {
-      this.platformName =
-        (this.navigator.platform &&
-          this.navigator.platform.toLowerCase().split(" ")[0]) ||
-        "";
-    }
-  }
-
-  private setVersion(v: any): void {
-    if (typeof v !== "undefined" && v !== null) {
-      v = v.split(".");
-      v = parseFloat(v[0] + "." + (v.length > 1 ? v[1] : 0));
-      if (!isNaN(v)) {
-        this.platformVersion = v;
-        return;
-      }
-    }
-
-    this.platformVersion = 0;
-
-    // fallback to user-agent checking
-    const pName: string = this.name();
-    const versionMatch: any = {
-      android: /Android (\d+).(\d+)?/,
-      ios: /OS (\d+)_(\d+)?/,
-      windowsphone: /Windows Phone (\d+).(\d+)?/
-    };
-
-    if (versionMatch[pName]) {
-      v = this.ua().match(versionMatch[pName]);
-
-      if (v && v.length > 2) {
-        this.platformVersion = parseFloat(v[1] + "." + v[2]);
-      }
-    }
-  }
-
-  private nextUid(): string {
-    return "uix" + this.nextId++;
-  }
-
-  private detect(): any {
-    const device: any = {};
-
-    device.isWebView = () => {
-      return !(
-        !window.cordova &&
-        !window.PhoneGap &&
-        !window.phonegap &&
-        window.forge !== "object"
-      );
-    };
-
-    device.ios = () => {
-      return device.iphone() || device.ipod() || device.ipad();
-    };
-
-    device.iphone = () => {
-      return !device.windows() && this.find("iphone");
-    };
-
-    device.ipod = () => {
-      return this.find("ipod");
-    };
-
-    device.ipad = () => {
-      return this.find("ipad");
-    };
-
-    device.android = () => {
-      return !device.windows() && this.find("android");
-    };
-
-    device.windows = () => {
-      return this.find("windows");
-    };
-
-    device.mobile = () => {
-      return (
-        device.androidPhone() ||
-        device.iphone() ||
-        device.ipod() ||
-        device.windowsPhone()
-      );
-    };
-
-    device.tablet = () => {
-      return device.ipad() || device.androidTablet() || device.windowsTablet();
-    };
-
-    device.desktop = () => {
-      return !device.tablet() && !device.mobile();
-    };
-
-    device.androidPhone = () => {
-      return device.android() && this.find("mobile");
-    };
-
-    device.androidTablet = () => {
-      return device.android() && !this.find("mobile");
-    };
-
-    device.windowsPhone = () => {
-      return device.windows() && this.find("phone");
-    };
-
-    device.windowsTablet = () => {
-      return device.windows() && (this.find("touch") && !device.windowsPhone());
-    };
-
-    return device;
-  }
-
-  private onWindowLoad(): void {
-    if (this.is("webview")) {
-      // the window and scripts are fully loaded, and a cordova/phonegap
-      // object exists then let's listen for the deviceready
-      document.addEventListener(
-        "deviceready",
-        () => this.onPlatformReady(),
-        false
-      );
-    } else {
-      // the window and scripts are fully loaded, but the window object doesn't have the
-      // cordova/phonegap object, so its just a browser, not a webview wrapped w/ cordova
-      this.onPlatformReady();
-    }
-
-    if (this.windowLoadListenderAttached) {
-      window.removeEventListener("load", () => this.onWindowLoad(), false);
-    }
-  }
-
-  private onPlatformReady(): void {
-    // the device is all set to go, init our own stuff then fire off our event
-    this.isReady = true;
-
-    for (const callback of this.readyCallbacks) {
-      // fire off all the callbacks that were added before the platform was ready
-      callback();
-    }
-
-    this.readyCallbacks = [];
-
-    document.body.classList.add("platform-ready");
-  }
-
-  private find(needle: string): boolean {
-    const userAgent = this.ua().toLowerCase();
-    return userAgent.indexOf(needle) !== -1;
+    navigator.app.exitApp();
   }
 }

@@ -3,12 +3,12 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { HomeComponent } from "./pages/home/home.component";
 import { AboutComponent } from "./pages/about/about.component";
-import { SettingsComponent } from "./pages/settings/settings.component";
+import { SettingComponent } from "./pages/setting/setting.component";
 
 export const ROUTING_COMPONENTS = [
   HomeComponent,
   AboutComponent,
-  SettingsComponent
+  SettingComponent
 ];
 
 export const APP_ROUTES: Routes = [
@@ -21,8 +21,8 @@ export const APP_ROUTES: Routes = [
     component: AboutComponent
   },
   {
-    path: "settings",
-    component: SettingsComponent
+    path: "setting",
+    component: SettingComponent
   },
   {
     path: "account",

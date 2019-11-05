@@ -3,65 +3,65 @@
   ==================== */
 
 :root {
-    --uix-safe-area-left: 0px;
-    --uix-safe-area-right: 0px;
-    --uix-safe-area-top: 0px;
-    --uix-safe-area-bottom: 0px;
-    --uix-safe-area-outer-left: 0px;
-    --uix-safe-area-outer-right: 0px;
+  --uix-safe-area-left: 0px;
+  --uix-safe-area-right: 0px;
+  --uix-safe-area-top: 0px;
+  --uix-safe-area-bottom: 0px;
+  --uix-safe-area-outer-left: 0px;
+  --uix-safe-area-outer-right: 0px;
 
-    @supports (left: env(safe-area-inset-left)) {
-        --uix-safe-area-top: env(safe-area-inset-top);
-        --uix-safe-area-bottom: env(safe-area-inset-bottom);
+  @supports (left: env(safe-area-inset-left)) {
+    --uix-safe-area-top: env(safe-area-inset-top);
+    --uix-safe-area-bottom: env(safe-area-inset-bottom);
 
-        .ios-left-edge,
-        .ios-edges,
-        .safe-area-left,
-        .safe-areas,
-        .popup,
-        .sheet-modal,
-        .panel-left {
-            --uix-safe-area-left: env(safe-area-inset-left);
-            --uix-safe-area-outer-left: env(safe-area-inset-left);
-        }
-
-        .ios-right-edge,
-        .ios-edges,
-        .safe-area-right,
-        .safe-areas,
-        .popup,
-        .sheet-modal,
-        .panel-right {
-            --uix-safe-area-right: env(safe-area-inset-right);
-            --uix-safe-area-outer-right: env(safe-area-inset-right);
-        }
-
-        .no-safe-areas,
-        .no-safe-area-left,
-        .no-ios-edges,
-        .no-ios-left-edge {
-            --uix-safe-area-left: 0px;
-            --uix-safe-area-outer-left: 0px;
-        }
-
-        .no-safe-areas,
-        .no-safe-area-right,
-        .no-ios-edges,
-        .no-ios-right-edge {
-            --uix-safe-area-right: 0px;
-            --uix-safe-area-outer-right: 0px;
-        }
+    .ios-left-edge,
+    .ios-edges,
+    .safe-area-left,
+    .safe-areas,
+    .popup,
+    .sheet-modal,
+    uix-panel[left] {
+      --uix-safe-area-left: env(safe-area-inset-left);
+      --uix-safe-area-outer-left: env(safe-area-inset-left);
     }
 
-    --uix-device-pixel-ratio: 1;
-
-    @media (min-resolution: 2dppx) {
-        --uix-device-pixel-ratio: 2;
+    .ios-right-edge,
+    .ios-edges,
+    .safe-area-right,
+    .safe-areas,
+    .popup,
+    .sheet-modal,
+    uix-panel[right] {
+      --uix-safe-area-right: env(safe-area-inset-right);
+      --uix-safe-area-outer-right: env(safe-area-inset-right);
     }
 
-    @media (min-resolution: 3dppx) {
-        --uix-device-pixel-ratio: 3;
+    .no-safe-areas,
+    .no-safe-area-left,
+    .no-ios-edges,
+    .no-ios-left-edge {
+      --uix-safe-area-left: 0px;
+      --uix-safe-area-outer-left: 0px;
     }
+
+    .no-safe-areas,
+    .no-safe-area-right,
+    .no-ios-edges,
+    .no-ios-right-edge {
+      --uix-safe-area-right: 0px;
+      --uix-safe-area-outer-right: 0px;
+    }
+  }
+
+  --uix-device-pixel-ratio: 1;
+
+  @media (min-resolution: 2dppx) {
+    --uix-device-pixel-ratio: 2;
+  }
+
+  @media (min-resolution: 3dppx) {
+    --uix-device-pixel-ratio: 3;
+  }
 }
 
 /*====================
@@ -69,36 +69,36 @@
   ==================== */
 
 .uix-ios {
-    --uix-font-family: -apple-system, SF Pro Text, SF UI Text, system-ui,
-        Helvetica Neue, Helvetica, Arial, sans-serif;
-    --uix-text-color: #000;
-    --uix-font-size: 14px;
-    --uix-line-height: 1.4;
-    --uix-bars-border-color: #c4c4c4;
+  --uix-font-family: -apple-system, SF Pro Text, SF UI Text, system-ui,
+    Helvetica Neue, Helvetica, Arial, sans-serif;
+  --uix-text-color: #000;
+  --uix-font-size: 14px;
+  --uix-line-height: 1.4;
+  --uix-bars-border-color: #c4c4c4;
 
-    .uix-theme-dark,
-    &.uix-theme-dark {
-        --uix-text-color: #fff;
-        --uix-bars-border-color: #282829;
-    }
+  .uix-theme-dark,
+  &.uix-theme-dark {
+    --uix-text-color: #fff;
+    --uix-bars-border-color: #282829;
+  }
 }
 
 .uix-md {
-    --uix-font-family: Roboto, system-ui, Noto, Helvetica, Arial, sans-serif;
-    --uix-text-color: #212121;
-    --uix-font-size: 14px;
-    --uix-line-height: 1.5;
-    --uix-bars-border-color: transparent;
+  --uix-font-family: Roboto, system-ui, Noto, Helvetica, Arial, sans-serif;
+  --uix-text-color: #212121;
+  --uix-font-size: 14px;
+  --uix-line-height: 1.5;
+  --uix-bars-border-color: transparent;
 
-    .uix-theme-dark,
-    &.uix-theme-dark {
-        --uix-text-color: rgba(255, 255, 255, 0.87);
-    }
+  .uix-theme-dark,
+  &.uix-theme-dark {
+    --uix-text-color: rgba(255, 255, 255, 0.87);
+  }
 }
 
 .uix-theme-dark {
-    --uix-bars-bg-color: #1b1b1b;
-    --uix-bars-text-color: #fff;
+  --uix-bars-bg-color: #1b1b1b;
+  --uix-bars-text-color: #fff;
 }
 
 /*====================
@@ -106,171 +106,177 @@
   ==================== */
 
 .text-color-primary {
-    --uix-theme-color-text-color: var(--uix-theme-color);
+  --uix-theme-color-text-color: var(--uix-theme-color);
 }
 
 .bg-color-primary {
-    --uix-theme-color-bg-color: var(--uix-theme-color);
+  --uix-theme-color-bg-color: var(--uix-theme-color);
 }
 
 .border-color-primary {
-    --uix-theme-color-border-color: var(--uix-theme-color);
+  --uix-theme-color-border-color: var(--uix-theme-color);
 }
 
 .ripple-color-primary {
-    --uix-theme-color-ripple-color: rgba(var(--uix-theme-color-rgb), 0.3);
+  --uix-theme-color-ripple-color: rgba(var(--uix-theme-color-rgb), 0.3);
 }
 
 :root {
 
-    @each $name,
-    $value in $colorsList {
-        $themeColorRed: red($value);
-        $themeColorGreen: green($value);
-        $themeColorBlue: blue($value);
-        --uix-color-#{$name}: $value;
-        --uix-color-#{$name}-rgb: $themeColorRed, $themeColorGreen, $themeColorBlue;
-        --uix-color-#{$name}-shade: darken($value, 8%);
-        --uix-color-#{$name}-tint: lighten($value, 8%);
-    }
-}
-
-@each $name,
-$value in $colorsList {
-    .color-theme-#{$name} {
-        $themeColorRed: red($value);
-        $themeColorGreen: green($value);
-        $themeColorBlue: blue($value);
-        --uix-theme-color: $value;
-        --uix-theme-color-rgb: $themeColorRed, $themeColorGreen, $themeColorBlue;
-        --uix-theme-color-shade: darken($value, 8%);
-        --uix-theme-color-tint: lighten($value, 8%);
-    }
-}
-
-@each $name,
-$value in $colorsList {
+  @each $name,
+  $value in $colorsList {
     $themeColorRed: red($value);
     $themeColorGreen: green($value);
     $themeColorBlue: blue($value);
+    --uix-color-#{$name}: #{$value};
+    --uix-color-#{$name}-rgb: #{$themeColorRed},
+    #{$themeColorGreen},
+    #{$themeColorBlue};
+    --uix-color-#{$name}-shade: darken(#{$value}, 8%);
+    --uix-color-#{$name}-tint: lighten(#{$value}, 8%);
+  }
+}
 
-    .color-#{$name} {
-        --uix-theme-color: $value;
-        --uix-theme-color-rgb: $themeColorRed, $themeColorGreen, $themeColorBlue;
-        --uix-theme-color-shade: darken($value, 8%);
-        --uix-theme-color-tint: lighten($value, 8%);
-    }
+@each $name,
+$value in $colorsList {
+  .color-theme-#{$name} {
+    $themeColorRed: red($value);
+    $themeColorGreen: green($value);
+    $themeColorBlue: blue($value);
+    --uix-theme-color: #{$value};
+    --uix-theme-color-rgb: #{$themeColorRed},
+    #{$themeColorGreen},
+    #{$themeColorBlue};
+    --uix-theme-color-shade: darken(#{$value}, 8%);
+    --uix-theme-color-tint: lighten(#{$value}, 8%);
+  }
+}
 
-    .text-color-#{$name} {
-        --uix-theme-color-text-color: $value;
-    }
+@each $name,
+$value in $colorsList {
+  $themeColorRed: red($value);
+  $themeColorGreen: green($value);
+  $themeColorBlue: blue($value);
 
-    .bg-color-#{$name} {
-        --uix-theme-color-bg-color: $value;
-    }
+  .color-#{$name} {
+    --uix-theme-color: #{$value};
+    --uix-theme-color-rgb: #{$themeColorRed},
+    #{$themeColorGreen},
+    #{$themeColorBlue};
+    --uix-theme-color-shade: darken(#{$value}, 8%);
+    --uix-theme-color-tint: lighten(#{$value}, 8%);
+  }
 
-    .border-color-#{$name} {
-        --uix-theme-color-border-color: $value;
-    }
+  .text-color-#{$name} {
+    --uix-theme-color-text-color: #{$value};
+  }
 
-    .ripple-color-#{$name},
-    .ripple-#{$name} {
-        --uix-theme-color-ripple-color: rgba($themeColorRed,
-            $themeColorGreen,
-            $themeColorBlue,
-            0.3);
-    }
+  .bg-color-#{$name} {
+    --uix-theme-color-bg-color: #{$value};
+  }
+
+  .border-color-#{$name} {
+    --uix-theme-color-border-color: #{$value};
+  }
+
+  .ripple-color-#{$name},
+  .ripple-#{$name} {
+    --uix-theme-color-ripple-color: rgba(#{$themeColorRed},
+      #{$themeColorGreen},
+      #{$themeColorBlue},
+      0.3);
+  }
 }
 
 html,
 body,
 .uix-root {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background: #fff;
-    overflow: hidden;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    font-family: var(--uix-font-family);
-    font-size: var(--uix-font-size);
-    line-height: var(--uix-line-height);
-    color: var(--uix-text-color);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--uix-font-family);
+  font-size: var(--uix-font-size);
+  line-height: var(--uix-line-height);
+  color: var(--uix-text-color);
 }
 
 .uix-theme-dark {
-    color: var(--uix-text-color);
+  color: var(--uix-text-color);
 }
 
 .uix-root {
-    overflow: hidden;
-    box-sizing: border-box;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .device-ios,
 .device-android {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .device-ios {
-    touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 // Fix for iPad in Safari in Lanscape mode
 @media (width: 1024px) and (height: 691px) and (orientation: landscape) {
 
-    html,
-    body,
-    .uix-root {
-        height: 671px;
-    }
+  html,
+  body,
+  .uix-root {
+    height: 671px;
+  }
 }
 
 @media (width: 1024px) and (height: 692px) and (orientation: landscape) {
 
-    html,
-    body,
-    .uix-root {
-        height: 672px;
-    }
+  html,
+  body,
+  .uix-root {
+    height: 672px;
+  }
 }
 
 * {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
 }
 
 a,
 input,
 textarea,
 select {
-    outline: 0;
+  outline: 0;
 }
 
 a {
-    cursor: pointer;
-    text-decoration: none;
-    color: var(--uix-theme-color);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--uix-theme-color);
 }
 
 p {
-    margin: 1em 0;
+  margin: 1em 0;
 }
 
 // Full viewport
 html.device-full-viewport {
 
-    &,
-    & body {
-        height: 100vh;
-    }
+  &,
+  & body {
+    height: 100vh;
+  }
 }
 
 @import "app-ios";

@@ -18,7 +18,7 @@ import { AppComponent } from "./app.component";
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
-    UixModule,
+    UixModule.forRoot(),
     AppRoutingModule,
     CoreModule
   ],

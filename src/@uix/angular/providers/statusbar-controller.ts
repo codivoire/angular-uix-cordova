@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-
-import Device from "../utils/device";
 import { Subject } from "rxjs";
 
-declare const window: any;
+import Device from "../utils/device";
+
+declare let window: any;
 
 export class StatusbarOptions {
   enabled = false;
@@ -11,17 +11,17 @@ export class StatusbarOptions {
 
   iosOverlaysWebView? = false;
   iosTextColor? = "black";
-  iosBackgroundColor? = "#f7f7f8";
+  iosBackgroundColor? = "white";
 
   androidOverlaysWebView? = false;
   androidTextColor? = "black";
-  androidBackgroundColor? = "#f7f7f8";
+  androidBackgroundColor? = "white";
 }
 
 @Injectable({
   providedIn: "root"
 })
-export class StatusbarProvider {
+export class StatusbarController {
   private params: StatusbarOptions;
   private backgroundColorState: Subject<string>;
 

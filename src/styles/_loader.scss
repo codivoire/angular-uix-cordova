@@ -1,0 +1,173 @@
+.app-loader {
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(2, 2, 2, 0.92);
+
+  .app-loader-content {
+    position: relative;
+    text-align: center;
+
+    .loader-spinner {
+      box-shadow: inset 0 0 1.7em 0 currentColor;
+      display: inline-flex;
+      font-size: 64px;
+      color: var(--app-color-dark);
+      width: 1.7em;
+      height: 1.7em;
+      position: relative;
+      border-radius: 50%;
+
+      &::before,
+      &::after {
+        content: "";
+        background-color: var(--app-theme-color);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: .6;
+        animation-name: k-pulse;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        border-radius: 50%;
+      }
+
+      &::after {
+        background-color: white;
+        animation-delay: -1s;
+      }
+    }
+
+    .loader-message {
+      margin-top: 30px;
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.app-spinner,
+.app-spinner:after {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+}
+
+.app-spinner {
+  position: relative;
+  margin: 20px auto;
+  text-indent: -9999em;
+  border: 7px solid rgba(255, 255, 255, 0.2);
+  border-left-color: white;
+  transform: translateZ(0);
+  animation: spinner 1.1s infinite linear;
+
+  &.inverse {
+    animation-name: spinner-inverse;
+  }
+
+  &.small,
+  &.small:after {
+    width: 25px;
+    height: 25px;
+  }
+
+  &.small {
+    border-width: 3px;
+  }
+
+  &.large,
+  &.large:after {
+    width: 80px;
+    height: 80px;
+  }
+
+  &.large {
+    border-width: 10px;
+  }
+
+  &.theme {
+    border-left-color: var(--app-theme-color);
+  }
+
+  &.blue {
+    border-left-color: var(--app-color-blue);
+  }
+
+  &.red {
+    border-left-color: var(--app-color-red);
+  }
+
+  &.green {
+    border-left-color: var(--app-color-green);
+  }
+
+  &.yellow {
+    border-left-color: var(--app-color-yellow);
+  }
+
+  &.orange {
+    border-left-color: var(--app-color-orange);
+  }
+
+  &.dark {
+    border-left-color: var(--app-color-dark);
+  }
+
+  &.light {
+    border-left-color: var(--app-color-light);
+  }
+
+  &.teal {
+    border-left-color: var(--app-color-teal);
+  }
+
+  &.purple {
+    border-left-color: var(--app-color-purple);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-inverse {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes k-pulse {
+
+  0%,
+  to {
+    transform: scale(0);
+    opacity: .6;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

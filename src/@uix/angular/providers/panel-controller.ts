@@ -24,7 +24,7 @@ export type PanelMode = "cover" | "reveal";
 @Injectable({
   providedIn: "root"
 })
-export class PanelProvider {
+export class PanelController {
   private el: Element;
   private selectedSide: PanelSide = "left";
   private panelElement: PanelElements = {};

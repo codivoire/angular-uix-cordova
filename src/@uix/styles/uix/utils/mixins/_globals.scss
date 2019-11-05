@@ -9,9 +9,11 @@
   visibility: hidden;
   opacity: 0;
   transition-duration: 400ms;
+
   &.not-animated {
     transition-duration: 0ms;
   }
+
   &.backdrop-in {
     visibility: visible;
     opacity: 1;
@@ -53,6 +55,24 @@
   width: 100%;
   height: 100%;
   font-size: 20px;
+}
+
+@mixin ios-translucent-bars($color) {
+  .ios-translucent-bars & {
+    @supports (backdrop-filter: blur(20px)) {
+      background-color: rgba($color, var(--f7-bars-translucent-opacity));
+      backdrop-filter: saturate(180%) blur(var(--f7-bars-translucent-blur));
+    }
+  }
+}
+
+@mixin ios-translucent-modals($color) {
+  .ios-translucent-modals & {
+    @supports (backdrop-filter: blur(20px)) {
+      background-color: rgba($color, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
+  }
 }
 
 // SVG BG

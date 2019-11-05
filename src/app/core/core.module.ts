@@ -2,12 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
-import {
-  TruncatePipe,
-  CapitalizePipe,
-  RelativeDatePipe
-} from "src/@uix/angular/core";
-
 import { LoaderComponent } from "./loader/loader.component";
 
 @NgModule({
@@ -16,10 +10,5 @@ import { LoaderComponent } from "./loader/loader.component";
   exports: CoreModule.COMPONENT_LIST
 })
 export class CoreModule {
-  static readonly COMPONENT_LIST = [
-    LoaderComponent,
-    TruncatePipe,
-    CapitalizePipe,
-    RelativeDatePipe
-  ];
+  static readonly COMPONENT_LIST = [LoaderComponent];
 }

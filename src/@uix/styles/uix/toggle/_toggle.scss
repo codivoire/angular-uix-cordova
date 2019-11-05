@@ -1,29 +1,38 @@
-.uix-ios {
+:root {
   --uix-toggle-handle-color: #fff;
-  --uix-toggle-width: 52px;
-  --uix-toggle-height: 32px;
-  --uix-toggle-border-color-ios: #e5e5e5;
+}
+
+.uix-ios {
+  --uix-toggle-width: 46px;
+  --uix-toggle-height: 28px;
+  --uix-toggle-border-color: #e5e5e5;
   --uix-toggle-inactive-color: #fff;
-  .uix-theme-dark, &.uix-theme-dark {
-    --uix-toggle-border-color-ios: #555;
+
+  .theme-dark,
+  &.theme-dark {
+    --uix-toggle-border-color: #555;
     --uix-toggle-inactive-color: #222;
   }
 }
+
 .uix-md {
-  --uix-toggle-handle-color: #fff;
   --uix-toggle-width: 36px;
   --uix-toggle-height: 14px;
   --uix-toggle-inactive-color: #b0afaf;
-  .uix-theme-dark, &.uix-theme-dark {
+
+  .theme-dark,
+  &.theme-dark {
     --uix-toggle-inactive-color: #555;
   }
 }
 
-.toggle, .toggle-icon {
+.toggle,
+.toggle-icon {
   width: var(--uix-toggle-width);
   height: var(--uix-toggle-height);
   border-radius: var(--uix-toggle-height);
 }
+
 .toggle {
   display: inline-block;
   vertical-align: middle;
@@ -31,13 +40,16 @@
   box-sizing: border-box;
   align-self: center;
   user-select: none;
+
   input[type="checkbox"] {
     display: none;
   }
-  input[disabled] ~ .toggle-icon {
+
+  input[disabled]~.toggle-icon {
     pointer-events: none;
   }
 }
+
 .toggle-icon {
   z-index: 0;
   margin: 0;
@@ -50,10 +62,13 @@
   box-sizing: border-box;
   display: block;
   cursor: pointer;
-  &:before, &:after {
+
+  &:before,
+  &:after {
     content: '';
     will-change: transform;
   }
+
   &:after {
     background: var(--uix-toggle-handle-color);
     position: absolute;

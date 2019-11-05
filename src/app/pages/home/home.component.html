@@ -38,7 +38,7 @@
           </a>
         </li>
         <li>
-          <a routerLink="/settings" class="item-link item-content">
+          <a routerLink="/setting" class="item-link item-content">
             <div class="item-inner">
               <div class="item-title">Settings</div>
             </div>
@@ -46,11 +46,51 @@
         </li>
       </ul>
     </div>
-    <p>
-      <uix-link href="/account/login">Sign In</uix-link>
-    </p>
-    <p>
-      <uix-link href="https://www.youtube.com" external>Youtube</uix-link>
-    </p>
+
+    <uix-block-title>Components</uix-block-title>
+    <div class="list">
+      <ul>
+        <li>
+          <a (click)="dialog()" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title">Test Dialog</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a (click)="toast()" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title">Test Toast</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a (click)="actionsheet()" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title">Test Action Sheet</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a (click)="actionsheet()" class="item-link item-content">
+            <div class="item-inner">
+              <div class="item-title">Test Loader</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <uix-block strong>
+      <p>
+        {{ 'Lorem ipsum dolor sit amet' | truncate:9 }}
+      </p>
+      <p>
+        <uix-link href="/account/login">Sign In</uix-link>
+      </p>
+      <p>
+        <uix-link href="https://www.youtube.com" external>Youtube</uix-link>
+      </p>
+    </uix-block>
   </uix-page-content>
 </uix-page>

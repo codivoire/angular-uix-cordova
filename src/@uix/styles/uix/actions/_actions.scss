@@ -1,0 +1,314 @@
+:root {
+  --uix-actions-grid-button-font-size: 12px;
+  --uix-actions-grid-button-text-color: #757575;
+
+  .dark-vars {
+    --uix-actions-label-text-color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+.uix-ios {
+  --uix-actions-border-radius: 13px;
+  /*
+  --uix-actions-button-text-color: var(--uix-theme-color);
+  */
+
+  --uix-actions-button-padding: 0px;
+  --uix-actions-button-text-align: center;
+  --uix-actions-button-height: 57px;
+  --uix-actions-button-height-landscape: 44px;
+  --uix-actions-button-font-size: 20px;
+  --uix-actions-button-icon-size: 28px;
+  --uix-actions-button-justify-content: center;
+  --uix-actions-label-padding: 8px 10px;
+
+  --uix-actions-label-font-size: 13px;
+  --uix-actions-label-justify-content: center;
+  --uix-actions-group-border-color: transparent;
+  --uix-actions-group-margin: 8px;
+  --uix-actions-grid-button-icon-size: 48px;
+
+  .uix-light {
+    --uix-actions-bg-color: rgba(255, 255, 255, 0.95);
+    --uix-actions-bg-color-rgb: 255, 255, 255;
+    --uix-actions-button-border-color: rgba(0, 0, 0, 0.2);
+    --uix-actions-button-pressed-bg-color: rgba(230, 230, 230, 0.9);
+    --uix-actions-button-pressed-bg-color-rgb: 230, 230, 230;
+    --uix-actions-label-text-color: #8a8a8a;
+  }
+
+  .uix-dark {
+    --uix-actions-bg-color: rgba(45, 45, 45, 0.95);
+    --uix-actions-bg-color-rgb: 45, 45, 45;
+    --uix-actions-button-border-color: rgba(255, 255, 255, 0.15);
+    --uix-actions-button-pressed-bg-color: rgba(50, 50, 50, 0.9);
+    --uix-actions-button-pressed-bg-color-rgb: 50, 50, 50;
+
+  }
+}
+
+.uix-md {
+  --uix-actions-border-radius: 0px;
+  --uix-actions-button-border-color: transparent;
+  --uix-actions-button-padding: 0 16px;
+  --uix-actions-button-text-align: left;
+  --uix-actions-button-height: 48px;
+  --uix-actions-button-height-landscape: 48px;
+  --uix-actions-button-font-size: 16px;
+  --uix-actions-button-icon-size: 24px;
+  --uix-actions-button-justify-content: space-between;
+  --uix-actions-label-padding: 12px 16px;
+  --uix-actions-label-font-size: 16px;
+  --uix-actions-label-justify-content: flex-start;
+  --uix-actions-group-margin: 0px;
+  --uix-actions-grid-button-icon-size: 48px;
+
+  .uix-light {
+    --uix-actions-bg-color: #fff;
+    --uix-actions-button-text-color: rgba(0, 0, 0, 0.87);
+    --uix-actions-button-pressed-bg-color: #e5e5e5;
+    --uix-actions-label-text-color: rgba(0, 0, 0, 0.54);
+    --uix-actions-group-border-color: rgba(0, 0, 0, 0.12);
+  }
+
+  .uix-dark {
+    --uix-actions-bg-color: #202020;
+    --uix-actions-button-text-color: #fff;
+    --uix-actions-button-pressed-bg-color: #2e2e2e;
+    --uix-actions-group-border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* === Actions === */
+
+.actions-backdrop {}
+
+.actions-modal {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 13500;
+  width: 100%;
+  transform: translate3d(0, 100%, 0);
+  display: none;
+  max-height: 100%;
+  @include scrollable();
+  transition-property: transform;
+
+  &.modal-in,
+  &.modal-out {
+    transition-duration: 300ms;
+  }
+
+  &.not-animated {
+    transition-duration: 0ms;
+  }
+
+  &.modal-in {
+    transform: translate3d(0, calc(-1 * var(--uix-safe-area-bottom)), 0);
+  }
+
+  &.modal-out {
+    z-index: 13500 - 1;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  @media (min-width: 496px) {
+    width: 480px;
+    left: 50%;
+    margin-left: -240px;
+  }
+
+  @media (orientation: landscape) {
+    --uix-actions-button-height: var(--uix-actions-button-height-landscape);
+  }
+}
+
+.actions-group {
+  overflow: hidden;
+  position: relative;
+  margin: var(--uix-actions-group-margin);
+  border-radius: var(--uix-actions-border-radius);
+  @include hairline(bottom, var(--uix-actions-group-border-color));
+  transform: translate3d(0, 0, 0);
+
+  &:last-child {
+    @include hairline-remove(bottom);
+  }
+}
+
+.actions-button,
+.actions-label {
+  width: 100%;
+  font-weight: normal;
+  margin: 0;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  text-align: var(--uix-actions-button-text-align);
+  background: var(--uix-actions-bg-color);
+  @include ios-translucent-modals(var(--uix-actions-bg-color-rgb));
+  @include hairline(bottom, var(--uix-actions-button-border-color));
+
+  &:first-child {
+    border-radius: var(--uix-actions-border-radius) var(--uix-actions-border-radius) 0 0;
+  }
+
+  &:last-child {
+    @include hairline-remove(bottom);
+    border-radius: 0 0 var(--uix-actions-border-radius) var(--uix-actions-border-radius);
+  }
+
+  &:first-child:last-child {
+    border-radius: var(--uix-actions-border-radius);
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  b,
+  &.actions-button-bold {
+    font-weight: 600;
+  }
+}
+
+.actions-button {
+  cursor: pointer;
+  display: flex;
+  color: var(--uix-actions-button-text-color, var(--uix-theme-color));
+  font-size: var(--uix-actions-button-font-size);
+  height: var(--uix-actions-button-height);
+  line-height: var(--uix-actions-button-height);
+  padding: var(--uix-actions-button-padding);
+  justify-content: var(--uix-actions-button-justify-content);
+  z-index: 10;
+
+  &.active-state {
+    background-color: var(--uix-actions-button-pressed-bg-color) !important;
+  }
+
+  &[class*="color-"] {
+    color: var(--uix-theme-color);
+  }
+}
+
+.actions-button.active-state {
+  @include ios-translucent-modals(var(--uix-actions-button-pressed-bg-color-rgb));
+}
+
+.actions-button-media {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+
+  i.icon {
+    width: var(--uix-actions-button-icon-size);
+    height: var(--uix-actions-button-icon-size);
+    font-size: var(--uix-actions-button-icon-size);
+  }
+}
+
+.actions-button a,
+.actions-button-text {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.actions-button-text {
+  width: 100%;
+  flex-shrink: 1;
+  text-align: var(--uix-actions-button-text-align);
+}
+
+.actions-label {
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  font-size: var(--uix-actions-label-font-size);
+  color: var(--uix-actions-label-text-color);
+  padding: var(--uix-actions-label-padding);
+  justify-content: var(--uix-actions-label-justify-content);
+  min-height: var(--uix-actions-label-min-height, var(--uix-actions-button-height));
+}
+
+.actions-label[class*=" color-"] {
+  --uix-actions-label-text-color: var(--uix-theme-color);
+}
+
+.actions-grid {
+  .actions-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border-radius: 0;
+    background: var(--uix-actions-bg-color);
+    margin-top: 0;
+
+    &:first-child {
+      border-radius: var(--uix-actions-border-radius) var(--uix-actions-border-radius) 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 var(--uix-actions-border-radius) var(--uix-actions-border-radius);
+    }
+
+    &:first-child:last-child {
+      border-radius: var(--uix-actions-border-radius);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  .actions-button,
+  .actions-label {
+    border-radius: 0 !important;
+    background: none;
+  }
+
+  .actions-button {
+    width: 100% / 3;
+    display: block;
+    color: var(--uix-actions-grid-button-text-color);
+    height: auto;
+    line-height: 1;
+    @include hairline-remove(bottom);
+    padding: 16px;
+  }
+
+  .actions-button-media {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: var(--uix-actions-grid-button-icon-size);
+    height: var(--uix-actions-grid-button-icon-size);
+
+    i.icon {
+      width: var(--uix-actions-grid-button-icon-size);
+      height: var(--uix-actions-grid-button-icon-size);
+      font-size: var(--uix-actions-grid-button-icon-size);
+    }
+  }
+
+  .actions-button-text {
+    margin-left: 0 !important;
+    text-align: center !important;
+    margin-top: 8px;
+    line-height: 1.33em;
+    height: 1.33em;
+    font-size: var(--uix-actions-grid-button-font-size);
+  }
+}
+
+.actions-grid .actions-group {
+  @include ios-translucent-modals(var(--uix-actions-bg-color-rgb));
+}
+
+@import "actions-ios";
+@import "actions-md";

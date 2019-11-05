@@ -12,4 +12,4 @@ const Helpers = {
   Validators: HelperValidators
 };
 
-export default Helpers;
+export { Helpers };

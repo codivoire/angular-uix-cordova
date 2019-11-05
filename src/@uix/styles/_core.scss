@@ -12,6 +12,7 @@ uix-block,
 uix-block-title,
 uix-block-header,
 uix-block-footer,
+uix-container,
 uix-button,
 uix-input {
   display: block;
@@ -38,6 +39,10 @@ uix-view {
   z-index: var(--uix-content-zindex);
   overflow: hidden;
   box-sizing: border-box;
+}
+
+uix-container {
+  width: 100%;
 }
 
 .uix-ios {

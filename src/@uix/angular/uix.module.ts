@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
@@ -28,11 +28,24 @@ import { UixBlock } from "./components/block/block.component";
 import { UixBlockTitle } from "./components/block/block-title.component";
 import { UixBlockHeader } from "./components/block/block-header.component";
 import { UixBlockFooter } from "./components/block/block-footer.component";
+import { UixContainer } from "./components/app/container.component";
+import { UixScaffoldCenter } from "./components/scaffold/scaffold-center.component";
+
 import { UixRating } from "./components/rating/rating.component";
 
-import { PanelProvider } from "./providers/panel";
-import { StatusbarProvider } from "./providers/statusbar";
 import { PlatformProvider } from "./providers/platform";
+import { PanelController } from "./providers/panel-controller";
+import { StatusbarController } from "./providers/statusbar-controller";
+import { AlertController } from "./providers/alert-controller";
+import { PopoverController } from "./providers/popover-controller";
+
+import { RelativeDatePipe } from "./pipes/relativedate.pipe";
+import { CapitalizePipe } from "./pipes/capitalize.pipe";
+import { TruncatePipe } from "./pipes/truncate.pipe";
+import { HumanTimePipe } from "./pipes/human-time.pipe";
+import { ToastController } from "./providers/toast-controller";
+import { LoaderController } from "./providers/loader-controller";
+import { ActionSheetController } from "./providers/action-sheet-controller";
 
 const DIRECTIVES = [
   BackDirective,
@@ -43,7 +56,16 @@ const DIRECTIVES = [
   PanelRightCloseDirective
 ];
 
-const PROVIDERS = [PanelProvider, StatusbarProvider, PlatformProvider];
+const PROVIDERS = [
+  PlatformProvider,
+  StatusbarController,
+  AlertController,
+  PanelController,
+  PopoverController,
+  ToastController,
+  ActionSheetController,
+  LoaderController
+];
 
 const DECLARATIONS = [
   ...DIRECTIVES,
@@ -66,7 +88,15 @@ const DECLARATIONS = [
   UixBlockFooter,
   UixLink,
   UixIcon,
-  UixIconBack
+  UixIconBack,
+  UixScaffoldCenter,
+  UixContainer,
+
+  // Pipes
+  RelativeDatePipe,
+  CapitalizePipe,
+  TruncatePipe,
+  HumanTimePipe
 ];
 
 @NgModule({
@@ -75,4 +105,15 @@ const DECLARATIONS = [
   exports: DECLARATIONS,
   providers: PROVIDERS
 })
-export class UixModule {}
+export class UixModule {
+  constructor() {}
+  static forRoot(setupOptions?: object): ModuleWithProviders {
+    return {
+      ngModule: UixModule,
+      providers: [
+        ...PROVIDERS,
+        { provide: "setupOptions", useValue: setupOptions }
+      ]
+    };
+  }
+}

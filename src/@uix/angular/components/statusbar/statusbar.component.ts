@@ -1,35 +1,25 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  AfterViewInit,
-  ElementRef
-} from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 
-import { StatusbarProvider } from "src/@uix/angular/providers/statusbar";
+import { StatusbarController } from "../../providers/statusbar-controller";
 
 @Component({
   selector: "uix-statusbar",
   template: `
-    <ng-content></ng-content>
+    <div class="statusbar" [style.backgroundColor]="backgroundColor"></div>
   `
 })
-export class UixStatusbar implements OnInit, OnDestroy, AfterViewInit {
+export class UixStatusbar implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
+  backgroundColor = "transparent";
 
-  constructor(
-    private element: ElementRef,
-    private statusbar: StatusbarProvider
-  ) {}
+  constructor(private statusbar: StatusbarController) {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
+  ngOnInit() {
     const sub = this.statusbar
       .backgroundColorChange()
       .subscribe((color: string) => {
-        this.element.nativeElement.style.backgroundColor = color;
+        this.backgroundColor = color;
       });
 
     this.subscriptions.push(sub);

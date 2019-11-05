@@ -4,7 +4,7 @@ import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
-import { StatusbarProvider } from "src/@uix/angular/core";
+import { StatusbarController } from "src/@uix/angular/core";
 
 @Component({
   selector: "app-root",
@@ -15,17 +15,19 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private statusbarService: StatusbarProvider
+    private statusbarCtrl: StatusbarController
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusbarService.init({
+      this.statusbarCtrl.init({
         enabled: true,
         overlay: this.platform.is("ios") ? true : false,
-        iosOverlaysWebView: true
+        iosOverlaysWebView: true,
+        iosBackgroundColor: "#F7F7F8",
+        iosTextColor: "#111111"
       });
 
       if (this.platform.is("cordova")) {

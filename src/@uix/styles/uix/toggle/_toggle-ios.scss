@@ -1,17 +1,21 @@
 .uix-ios {
   .toggle {
-    input[type="checkbox"]:checked + .toggle-icon {
+    input[type="checkbox"]:checked+.toggle-icon {
       background: var(--uix-toggle-active-color, var(--uix-theme-color));
+
       &:before {
         transform: scale(0);
       }
+
       &:after {
         transform: translateX(calc(var(--uix-toggle-width) - var(--uix-toggle-height)));
       }
     }
   }
+
   .toggle-icon {
-    background: var(--uix-toggle-border-color-ios);
+    background: var(--uix-toggle-border-color);
+
     &:before {
       position: absolute;
       left: 2px;
@@ -25,27 +29,32 @@
       transition-duration: 300ms;
       transform: scale(1);
     }
+
     &:after {
       height: calc(var(--uix-toggle-height) - 4px);
       width: calc(var(--uix-toggle-height) - 4px);
       top: 2px;
       left: 2px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       border-radius: calc(var(--uix-toggle-height) - 4px);
     }
   }
+
   .toggle-active-state {
-    input[type="checkbox"]:not(:checked) + .toggle-icon {
+    input[type="checkbox"]:not(:checked)+.toggle-icon {
       &:before {
         transform: scale(0);
       }
     }
-    input[type="checkbox"] + .toggle-icon, {
+
+    input[type="checkbox"]+.toggle-icon,
+      {
       &:after {
         width: calc(var(--uix-toggle-height) + 4px);
       }
     }
-    input[type="checkbox"]:checked + .toggle-icon {
+
+    input[type="checkbox"]:checked+.toggle-icon {
       &:after {
         transform: translateX(calc(var(--uix-toggle-width) - var(--uix-toggle-height) - 8px));
       }

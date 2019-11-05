@@ -1,21 +1,23 @@
 .uix-md {
   .toggle {
-    input[type="checkbox"]:checked + .toggle-icon {
-
+    input[type="checkbox"]:checked+.toggle-icon {
       background: var(--uix-toggle-active-color, rgba(var(--uix-theme-color-rgb), 0.5));
+
       &:after {
         transform: translateX(calc(var(--uix-toggle-width) - var(--uix-toggle-height) - 6px));
         background: var(--uix-toggle-active-color, var(--uix-theme-color));
       }
     }
   }
+
   .toggle-icon {
     background: var(--uix-toggle-inactive-color);
+
     &:after {
       height: calc(var(--uix-toggle-height) + 6px);
       width: calc(var(--uix-toggle-height) + 6px);
       top: -3px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
       border-radius: var(--uix-toggle-height);
       left: 0;
     }

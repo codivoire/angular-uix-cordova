@@ -5,19 +5,24 @@ import {
   NavigationStart,
   Event as NavigationEvent
 } from "@angular/router";
+import { trigger } from "@angular/animations";
 import { filter } from "rxjs/operators";
 
-import { RouterTransition } from "../../utils/router-transition";
+import { IosTranstion } from "../../animations/ios-transition";
+import { MdTranstion } from "../../animations/md-transition";
+import { HelperDevice } from "../../helpers/device";
 import Support from "../../utils/support";
+
+const TRANSITION = HelperDevice.is("ios") ? IosTranstion : MdTranstion;
 
 @Component({
   selector: "uix-view",
   template: `
-    <section [@routerTransition]="prepareRoute(route)">
+    <section [@pageTransition]="prepareRoute(route)">
       <router-outlet #route="outlet"></router-outlet>
     </section>
   `,
-  animations: [RouterTransition]
+  animations: [trigger("pageTransition", TRANSITION)]
 })
 export class UixView {
   private historyQueue: NavigationStart[] = [];
