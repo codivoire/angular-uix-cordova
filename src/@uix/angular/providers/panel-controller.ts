@@ -57,37 +57,33 @@ export class PanelController {
     md: 300
   };
 
-  constructor() {
-    const panels = document.querySelectorAll(this.selectors.panel);
+  constructor() {}
 
-    if (panels.length) {
-      const panel = panels[0];
-      const parentDiv = panel.parentNode;
-      const backdrop = document.createElement(this.selectors.backdrop);
+  init(panel: Element) {
+    const parentDiv = panel.parentNode;
+    const backdrop = document.createElement(this.selectors.backdrop);
+    parentDiv.insertBefore(backdrop, panel);
 
-      parentDiv.insertBefore(backdrop, panel);
+    let side = PanelSides.left;
 
-      panels.forEach(p => {
-        let side = PanelSides.left;
-
-        if (HelperArray.inArray("left", p.getAttributeNames())) {
-          this.panelElement[PanelSides.left] = p;
-        }
-
-        if (HelperArray.inArray("right", p.getAttributeNames())) {
-          this.panelElement[PanelSides.right] = p;
-          side = PanelSides.right;
-        }
-
-        if (HelperArray.inArray("reveal", p.getAttributeNames())) {
-          this.panelModes[side] = "reveal";
-        }
-      });
+    if (HelperArray.inArray("left", panel.getAttributeNames())) {
+      this.panelElement[PanelSides.left] = panel;
     }
 
-    document
-      .querySelector(this.selectors.backdrop)
-      .addEventListener("click", () => this.close(this.selectedSide), false);
+    if (HelperArray.inArray("right", panel.getAttributeNames())) {
+      this.panelElement[PanelSides.right] = panel;
+      side = PanelSides.right;
+    }
+
+    if (HelperArray.inArray("reveal", panel.getAttributeNames())) {
+      this.panelModes[side] = "reveal";
+    }
+
+    backdrop.addEventListener(
+      "click",
+      () => this.close(this.selectedSide),
+      false
+    );
   }
 
   open(side: PanelSide = "left") {
@@ -117,6 +113,14 @@ export class PanelController {
     const state = this.el.hasAttribute("active") ? false : true;
 
     this.wrapHtml(side, this.panelModes[side], state);
+  }
+
+  status(side: PanelSide = "left") {
+    if (!this.panelElement[side]) {
+      return false;
+    }
+
+    return this.panelElement[side].hasAttribute("active");
   }
 
   private wrapHtml(side: PanelSide, type: PanelMode, state: boolean) {

@@ -1,5 +1,3 @@
-import { AbstractControl } from "@angular/forms";
-
 export namespace HelperDate {
   export function isValid(dateString: string): boolean {
     // First check for the pattern
@@ -31,10 +29,10 @@ export namespace HelperDate {
     return day > 0 && day <= monthLength[month - 1];
   }
 
-  export function composeBirthdate(g: AbstractControl): string {
-    let d = g.get("day").value;
-    let m = g.get("month").value;
-    const y = g.get("year").value;
+  export function composeBirthdate(g): string {
+    let d = g.day;
+    let m = g.month;
+    const y = g.year;
 
     d = d <= 9 ? "0" + d : d;
     m = m <= 9 ? "0" + m : m;

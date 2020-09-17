@@ -31,8 +31,7 @@ class Device {
     this.platform = window.navigator.platform;
     this.ua = window.navigator.userAgent;
 
-    this.cordova = !!(window.cordova || window.phonegap);
-    this.phonegap = !!(window.cordova || window.phonegap);
+    this.cordova = !!(window.cordova);
 
     this.screenWidth = window.screen.width;
     this.screenHeight = window.screen.height;
@@ -149,12 +148,9 @@ class Device {
     if (
       (this.webView || (this.android && this.cordova)) &&
       window.innerWidth * window.innerHeight ===
-        window.screen.width * window.screen.height
+      window.screen.width * window.screen.height
     ) {
-      if (
-        this.iphoneX &&
-        (window.orientation === 90 || window.orientation === -90)
-      ) {
+      if (this.iphoneX && (window.innerHeight > window.innerWidth)) {
         return false;
       }
       return true;

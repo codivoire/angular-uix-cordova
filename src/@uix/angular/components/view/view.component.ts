@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   Router,
   RouterOutlet,
@@ -8,29 +8,25 @@ import {
 import { trigger } from "@angular/animations";
 import { filter } from "rxjs/operators";
 
-import { IosTranstion } from "../../animations/ios-transition";
-import { MdTranstion } from "../../animations/md-transition";
-import { HelperDevice } from "../../helpers/device";
+import { UIX_PAGE } from "../../utils/constants";
 import Support from "../../utils/support";
-
-const TRANSITION = HelperDevice.is("ios") ? IosTranstion : MdTranstion;
 
 @Component({
   selector: "uix-view",
+  animations: [trigger("pageTransition", UIX_PAGE.TRANSITION)],
   template: `
-    <section [@pageTransition]="prepareRoute(route)">
+    <section [@pageTransition]="animate(route)">
       <router-outlet #route="outlet"></router-outlet>
     </section>
   `,
-  animations: [trigger("pageTransition", TRANSITION)]
 })
-export class UixView {
+export class UixView implements OnInit {
   private historyQueue: NavigationStart[] = [];
   private animationNumber = 0;
   private lastRoute: NavigationStart;
   private newRoute: NavigationStart;
 
-  constructor(router: Router) {
+  constructor(private router: Router) {
     // init device support
     Support.init();
 
@@ -57,7 +53,9 @@ export class UixView {
       });
   }
 
-  prepareRoute(outlet: RouterOutlet) {
+  ngOnInit() {}
+
+  animate(outlet: RouterOutlet) {
     return this.animationNumber;
   }
 

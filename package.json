@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "cordova-angular-uix",
-  "version": "1.0.0",
+  "name": "angular-uix-cordova",
+  "version": "1.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 3000 -o",
@@ -13,23 +13,22 @@
     "launch:ios": "cordova run ios --device --prod --release"
   },
   "dependencies": {
-    "@angular/animations": "~8.2.4",
-    "@angular/common": "~8.2.4",
-    "@angular/compiler": "~8.2.4",
-    "@angular/core": "~8.2.4",
-    "@angular/forms": "~8.2.4",
-    "@angular/platform-browser": "~8.2.4",
-    "@angular/platform-browser-dynamic": "~8.2.4",
-    "@angular/router": "~8.2.4",
-    "@ionic-native/core": "^5.13.0",
-    "@ionic-native/device": "^5.13.0",
-    "@ionic-native/dialogs": "^5.13.0",
-    "@ionic-native/network": "^5.13.0",
-    "@ionic-native/screen-orientation": "^5.13.0",
-    "@ionic-native/splash-screen": "^5.13.0",
-    "@ionic-native/status-bar": "^5.13.0",
-    "@ionic/angular": "^4.8.1",
-    "axios": "^0.19.0",
+    "@angular/animations": "~10.1.1",
+    "@angular/common": "~10.1.1",
+    "@angular/compiler": "~10.1.1",
+    "@angular/core": "~10.1.1",
+    "@angular/forms": "~10.1.1",
+    "@angular/platform-browser": "~10.1.1",
+    "@angular/platform-browser-dynamic": "~10.1.1",
+    "@angular/router": "~10.1.1",
+    "@ionic-native/core": "^5.28.0",
+    "@ionic-native/device": "^5.28.0",
+    "@ionic-native/dialogs": "^5.28.0",
+    "@ionic-native/network": "^5.28.0",
+    "@ionic-native/screen-orientation": "^5.28.0",
+    "@ionic-native/splash-screen": "^5.28.0",
+    "@ionic-native/status-bar": "^5.28.0",
+    "@ionic/angular": "^5.3.2",
     "cordova-android": "^8.0.0",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-dialogs": "^2.0.2",
@@ -40,22 +39,22 @@
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-whitelist": "^1.3.4",
     "es6-promise-plugin": "^4.2.2",
-    "ngx-webstorage-service": "^4.1.0",
-    "rxjs": "6.5.2",
-    "sweetalert2": "^8.16.4",
-    "tslib": "1.10.0",
-    "zone.js": "0.10.2"
+    "rxjs": "~6.6.3",
+    "sweetalert2": "^9.14.3",
+    "tslib": "^2.0.1",
+    "zone.js": "~0.11.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.803.2",
-    "@angular/cli": "8.3.2",
-    "@angular/compiler-cli": "8.2.4",
-    "@angular/language-service": "8.2.4",
-    "@types/node": "12.7.3",
-    "codelyzer": "~5.1.0",
-    "ts-node": "8.3.0",
-    "tslint": "5.19.0",
-    "typescript": "3.5.3"
+    "@angular-devkit/build-angular": "~0.1001.1",
+    "@angular/cli": "10.1.1",
+    "@angular/compiler-cli": "10.1.1",
+    "@angular/language-service": "10.1.1",
+    "@angular/platform-server": "10.1.1",
+    "@types/node": "14.10.1",
+    "codelyzer": "6.0.0",
+    "ts-node": "8.10.2",
+    "tslint": "6.1.3",
+    "typescript": "~3.9.7"
   },
   "cordova": {
     "plugins": {
@@ -70,8 +69,6 @@
       "cordova-plugin-dialogs": {},
       "cordova-plugin-screen-orientation": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

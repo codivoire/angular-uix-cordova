@@ -1,31 +1,21 @@
-[![Build Status](https://travis-ci.org/lambirou/cordova-angular-uix.svg?branch=master)](https://travis-ci.org/lambirou/cordova-angular-uix)
-[![dependencies Status](https://david-dm.org/lambirou/cordova-angular-uix/status.svg)](https://david-dm.org/lambirou/cordova-angular-uix)
-[![devDependencies Status](https://david-dm.org/lambirou/cordova-angular-uix/dev-status.svg)](https://david-dm.org/lambirou/cordova-angular-uix?type=dev)
-[![Gitter][chat-img]][chat]
-
-[chat-img]: https://img.shields.io/badge/Chat-on_gitter-teal.svg
-[chat]: https://gitter.im/lambirou-cordova-angular-uix/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link
-
-<br>
-
 # Modern Hybrid App Boilerplate
 
-### Preface
+## Preface
 
 This is a full fledged **PRODUCTION READY** workflow boilerplate for building rapid and beautiful application.
 
 The technologies used in this workflow boilerplate shows case a `subset of technologies` we are currently using within our team ( **we put this project in github mainly as recruiting purpose for our team** ), and we are trying to give our candidates confidence that by working with us, they will be using decent technologies as well as staying relevant to the industry. And that is what our team strongly believed in - **technology innovation and promoting developers' relevancy in the industry**.
 
-If you are interested in working with us, feel free to send a message to [lambirou](https://www.twitter.com/lambirou).
+If you are interested in working with us, feel free to send a message to [Horizom](https://horizom.github.io).
 
-### Features
+## Features
 
 Features
 
-- Angular v8
+- Angular
 - Cordova
-- Ionic Native v5
-- TypeScript v3.5
+- Ionic Native
+- UIX Framework
 - SCSS
 
 ## Installation
@@ -33,7 +23,7 @@ Features
 Step 1: Clone this repo
 
 ```
-git clone https://github.com/lambirou/cordova-angular-uix.git my-app
+git clone https://github.com/horizom/angular-uix-cordova.git my-app
 cd my-app
 ```
 
@@ -53,7 +43,7 @@ And Done, as easy as 123!!
 
 ## Angular CLI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 ## Development server
 
@@ -74,7 +64,7 @@ $ npm start       # build and watch, but javascript and css not minified
 $ npm run build     # build a minified production version
 ```
 
-### List of Cordova Commands
+### List of Workflow Commands
 
 ```sh
 $ cordova platform add ios      # add android ios to your project

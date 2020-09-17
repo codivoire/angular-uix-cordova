@@ -41,17 +41,23 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.json",
-            "assets": ["src/assets"],
-            "styles": ["src/@uix/styles/bundle.scss", "src/styles/bundle.scss"],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "assets": [
+              "src/assets"
+            ],
+            "styles": [
+              "src/@uix/styles/bundle.scss",
+              "src/styles/bundle.scss"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -61,11 +67,13 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -89,12 +97,19 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "hybridapp"
+  "defaultProject": "hybridapp",
+  "cli": {
+    "analytics": "fd84a560-e24d-487a-a229-b42d5ea8f275"
+  }
 }

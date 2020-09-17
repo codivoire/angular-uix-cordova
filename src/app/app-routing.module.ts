@@ -25,10 +25,6 @@ export const APP_ROUTES: Routes = [
     component: SettingComponent
   },
   {
-    path: "account",
-    loadChildren: "src/app/pages/_account/account.module#AccountModule"
-  },
-  {
     path: "**",
     redirectTo: ""
   }

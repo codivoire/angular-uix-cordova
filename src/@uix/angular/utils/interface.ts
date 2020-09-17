@@ -12,3 +12,8 @@ export interface BackButtonEmitter extends Subject<BackButtonEventDetail> {
     callback: () => Promise<any> | void
   ): Subscription;
 }
+
+export interface UixSetupConfig {
+  platformBuild?: string;
+  pageTransition?: any;
+}

@@ -19,7 +19,7 @@ export class AlertController {
   fire(opts: SweetAlertOptions | string): Promise<SweetAlertResult> {
     let settings: SweetAlertOptions;
     settings = typeof opts === "string" ? { text: opts } : opts;
-    settings.heightAuto = false;
+    // settings.heightAuto = false;
 
     const alert = Swal.fire(settings);
 

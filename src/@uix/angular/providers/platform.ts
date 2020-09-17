@@ -65,7 +65,7 @@ export class PlatformProvider {
   constructor(@Inject(DOCUMENT) private doc: any, zone: NgZone) {
     zone.run(() => {
       this.win = doc.defaultView;
-      this.backButton.subscribeWithPriority = function(priority, callback) {
+      this.backButton.subscribeWithPriority = function (priority, callback) {
         return this.subscribe(ev =>
           ev.register(priority, () => zone.run(callback))
         );
@@ -267,6 +267,6 @@ export class PlatformProvider {
    * Close an app on Android or Windows
    */
   exitApp(): void {
-    navigator.app.exitApp();
+    (navigator as any).app.exitApp();
   }
 }

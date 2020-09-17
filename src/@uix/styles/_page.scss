@@ -1,11 +1,29 @@
+:root {
+  --uix-ios-home-indicator-height: 34px;
+  --uix-page-height: 100%;
+  --uix-page-contain: layout size style;
+}
+
+.uix-ios {
+  --uix-page-height: calc(100% - 34px);
+}
+
+.uix-ios:not(.device-iphone-x) {
+  --uix-page-height: 100%;
+}
+
+.uix-md {
+  --uix-page-contain: strict;
+}
+
 uix-page {
   box-sizing: border-box;
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
-  contain: layout size style;
+  height: var(--uix-page-height);
+  contain: var(--uix-page-contain);
   background: var(--uix-page-bg-color);
   z-index: $z-index-view;
   transform: translate3d(0, 0, 0);
@@ -42,11 +60,5 @@ uix-page-content {
         rgba(0, 0, 0, 0) 10%,
         rgba(0, 0, 0, 0.01) 50%,
         rgba(0, 0, 0, 0.2) 100%);
-  }
-}
-
-.uix-md {
-  uix-page {
-    contain: strict;
   }
 }

@@ -1,19 +1,23 @@
 :root {
-    --uix-statusbar-height: 0px;
-    --uix-statusbar-bg-color: var(--uix-bars-bg-color);
+  --uix-statusbar-height: 0px;
+  --uix-statusbar-bg-color: var(--uix-bars-bg-color);
 }
 
 .uix-ios {
-    --uix-statusbar-height: 20px;
+  --uix-statusbar-height: 44px;
+}
+
+.uix-ios:not(.device-iphone-x) {
+  --uix-statusbar-height: 20px;
 }
 
 .uix-md {
-    --uix-statusbar-height: 24px;
+  --uix-statusbar-height: 24px;
 }
 
 .uix-ios:not(.with-statusbar),
 .uix-md:not(.with-statusbar) {
-    --uix-statusbar-height: 0px;
+  --uix-statusbar-height: 0px;
 }
 
 /** .with-statusbar {
@@ -23,20 +27,20 @@
 } **/
 
 .with-statusbar {
-    .uix-root {
-        top: var(--uix-statusbar-height);
-    }
+  .uix-root {
+    top: var(--uix-statusbar-height);
+  }
 }
 
 .statusbar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 10000;
-    box-sizing: border-box;
-    display: block;
-    height: var(--uix-statusbar-height);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  box-sizing: border-box;
+  display: block;
+  height: var(--uix-statusbar-height);
 }
 
 @import "statusbar-ios";

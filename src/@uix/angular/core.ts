@@ -23,3 +23,6 @@ export * from "./helpers/array";
 export * from "./helpers/device";
 export * from "./helpers/date";
 export * from "./helpers/validators";
+
+// CONSTANTS
+export * from "./utils/constants";

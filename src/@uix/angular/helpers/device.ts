@@ -17,10 +17,7 @@ export namespace HelperDevice {
 
     device.isWebView = () => {
       return !(
-        !window.cordova &&
-        !window.PhoneGap &&
-        !window.phonegap &&
-        window.forge !== "object"
+        !window.cordova
       );
     };
 

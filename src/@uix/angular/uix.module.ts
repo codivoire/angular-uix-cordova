@@ -105,15 +105,4 @@ const DECLARATIONS = [
   exports: DECLARATIONS,
   providers: PROVIDERS
 })
-export class UixModule {
-  constructor() {}
-  static forRoot(setupOptions?: object): ModuleWithProviders {
-    return {
-      ngModule: UixModule,
-      providers: [
-        ...PROVIDERS,
-        { provide: "setupOptions", useValue: setupOptions }
-      ]
-    };
-  }
-}
+export class UixModule {}
