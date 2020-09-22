@@ -4,7 +4,7 @@ import { Subscription } from "rxjs";
 import { AlertController, LoaderController } from "src/@uix/angular/core";
 
 @Component({
-  selector: "app-home",
+  selector: "home",
   templateUrl: "./home.page.html",
   styleUrls: ["./home.page.scss"]
 })

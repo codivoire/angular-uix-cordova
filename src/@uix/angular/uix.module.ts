@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from "@angular/core";
+import { NgModule, InjectionToken } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 
@@ -46,6 +46,12 @@ import { HumanTimePipe } from "./pipes/human-time.pipe";
 import { ToastController } from "./providers/toast-controller";
 import { LoaderController } from "./providers/loader-controller";
 import { ActionSheetController } from "./providers/action-sheet-controller";
+
+export interface UixOptions {
+  [key: string]: any;
+}
+
+export const UIX_OPTIONS = new InjectionToken<UixOptions>('uix.options');
 
 const DIRECTIVES = [
   BackDirective,
@@ -100,9 +106,21 @@ const DECLARATIONS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
   declarations: DECLARATIONS,
   exports: DECLARATIONS,
   providers: PROVIDERS
 })
-export class UixModule {}
+export class UixModule {
+  static initialize(options: UixOptions = {}) {
+    return {
+      ngModule: UixModule,
+      providers: [
+        { provide: UIX_OPTIONS, useValue: options }
+      ]
+    };
+  }
+}

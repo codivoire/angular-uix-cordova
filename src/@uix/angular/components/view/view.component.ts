@@ -8,12 +8,26 @@ import {
 import { trigger } from "@angular/animations";
 import { filter } from "rxjs/operators";
 
-import { UIX_PAGE } from "../../utils/constants";
 import Support from "../../utils/support";
+import { MdTranstion } from '../../animations/md-transition';
+import { IosTranstion } from '../../animations/ios-transition';
+
+const userAgent = window.navigator.userAgent;
+const isIpad = userAgent.match(/(iPad).*OS\s([\d_]+)/);
+const isIpod = userAgent.match(/(iPod)(.*OS\s([\d_]+))?/);
+const isIphone = !isIpad && userAgent.match(/(iPhone\sOS|iOS)\s([\d_]+)/);
+
+let transition = MdTranstion;
+
+if (isIpad || isIphone || isIpod) {
+  transition = IosTranstion;
+}
+
+const pageTransition = trigger("pageTransition", transition);
 
 @Component({
   selector: "uix-view",
-  animations: [trigger("pageTransition", UIX_PAGE.TRANSITION)],
+  animations: [pageTransition],
   template: `
     <section [@pageTransition]="animate(route)">
       <router-outlet #route="outlet"></router-outlet>
@@ -26,7 +40,9 @@ export class UixView implements OnInit {
   private lastRoute: NavigationStart;
   private newRoute: NavigationStart;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router
+  ) {
     // init device support
     Support.init();
 

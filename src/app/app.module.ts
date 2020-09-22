@@ -17,7 +17,9 @@ import { AppService } from "./shared/services/app.service"
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
-    UixModule,
+    UixModule.initialize({
+      transition: "material"
+    }),
     AppRoutingModule
   ],
   providers: [
