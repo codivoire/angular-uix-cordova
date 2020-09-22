@@ -16,9 +16,7 @@ export namespace HelperDevice {
     const device: any = {};
 
     device.isWebView = () => {
-      return !(
-        !window.cordova
-      );
+      return !window["cordova"];
     };
 
     device.ios = () => {
@@ -96,7 +94,7 @@ export namespace HelperDevice {
     const d: any = detect();
 
     if (needle === "cordova") {
-      return typeof window.cordova !== "undefined";
+      return window["cordova"] && typeof window["cordova"] !== "undefined";
     }
 
     if (needle === "webview") {

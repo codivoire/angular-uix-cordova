@@ -82,9 +82,13 @@ uix-navbar {
     }
   }
 
-  uix-navbar-right:first-child {
-    position: absolute;
-    height: 100%;
+  uix-navbar-right {
+    justify-content: flex-end;
+
+    &:first-child {
+      position: absolute;
+      height: 100%;
+    }
   }
 
   &.no-hairline,
@@ -168,7 +172,9 @@ uix-navbar-inner {
   top: 0;
   width: 100%;
   height: var(--uix-navbar-height);
-  display: flex;
+  display: grid;
+  grid-template-columns: 70px 1fr 70px;
+  gap: 8px;
   align-items: center;
   box-sizing: border-box;
   padding: 0 calc(var(--uix-navbar-inner-padding-right) + var(--uix-safe-area-right)) 0 calc(var(--uix-navbar-inner-padding-right) + var(--uix-safe-area-left));

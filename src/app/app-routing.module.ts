@@ -1,41 +1,26 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from "./pages/home/home.component";
-import { AboutComponent } from "./pages/about/about.component";
-import { SettingComponent } from "./pages/setting/setting.component";
-
-export const ROUTING_COMPONENTS = [
-  HomeComponent,
-  AboutComponent,
-  SettingComponent
-];
-
-export const APP_ROUTES: Routes = [
+const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: "",
-    component: HomeComponent
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: "about",
-    component: AboutComponent
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
   },
   {
-    path: "setting",
-    component: SettingComponent
-  },
-  {
-    path: "**",
-    redirectTo: ""
+    path: 'setting',
+    loadChildren: () => import('./pages/setting/setting.module').then(m => m.SettingPageModule)
   }
 ];
 
 @NgModule({
+  exports: [RouterModule],
   imports: [
-    RouterModule.forRoot(APP_ROUTES, {
-      useHash: true
-    })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule]
 })
 export class AppRoutingModule {}

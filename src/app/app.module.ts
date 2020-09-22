@@ -7,22 +7,25 @@ import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 import { UixModule } from "src/@uix/angular/core";
-import { CoreModule } from "./core/core.module";
 
-import { AppRoutingModule, ROUTING_COMPONENTS } from "./app-routing.module";
+import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { AppService } from "./shared/services/app.service"
 
 @NgModule({
-  declarations: [AppComponent, ...ROUTING_COMPONENTS],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     UixModule,
-    AppRoutingModule,
-    CoreModule
+    AppRoutingModule
   ],
-  providers: [StatusBar, SplashScreen],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    AppService
+  ],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
   exports: []
 })

@@ -18,12 +18,12 @@
     b {
       font-weight: 600;
     }
-    .left {
-      margin-right: 10px;
-    }
-    .right {
-      margin-left: 10px;
-    }
+    // .left {
+    //   margin-right: 10px;
+    // }
+    // .right {
+    //   margin-left: 10px;
+    // }
     .right:first-child {
       right: calc(8px + var(--uix-safe-area-right));
     }
@@ -409,6 +409,7 @@
     }
   }
 }
+
 @keyframes ios-navbar-element-fade-in {
   from {
     opacity: 0;

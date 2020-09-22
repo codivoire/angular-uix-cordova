@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-setting",
-  templateUrl: "./setting.component.html",
-  styleUrls: ["./setting.component.scss"]
+  templateUrl: "./setting.page.html",
+  styleUrls: ["./setting.page.scss"]
 })
-export class SettingComponent implements OnInit {
+export class SettingPage implements OnInit {
   title = "Settings";
 
   constructor() {}

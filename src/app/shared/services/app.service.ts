@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
+import { Platform } from '@ionic/angular';
 
-import { PlatformProvider } from "src/@uix/angular/core";
 
 @Injectable({
   providedIn: "root"
 })
 export class AppService {
-  constructor(private platform: PlatformProvider) {}
+  constructor(private platform: Platform) {}
 
   isAndroid(): boolean {
     return this.platform.is("android");
@@ -18,9 +18,5 @@ export class AppService {
 
   isCordova(): boolean {
     return this.platform.is("cordova");
-  }
-
-  exit() {
-    this.platform.exitApp();
   }
 }

@@ -3,10 +3,10 @@ import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-about",
-  templateUrl: "./about.component.html",
-  styleUrls: ["./about.component.scss"]
+  templateUrl: "./about.page.html",
+  styleUrls: ["./about.page.scss"]
 })
-export class AboutComponent implements OnInit, OnDestroy {
+export class AboutPage implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   title = "About";

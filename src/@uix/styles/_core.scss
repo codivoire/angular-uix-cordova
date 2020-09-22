@@ -39,6 +39,7 @@ uix-view {
   z-index: var(--uix-content-zindex);
   overflow: hidden;
   box-sizing: border-box;
+  background: var(--uix-page-bg-color);
 }
 
 uix-container {

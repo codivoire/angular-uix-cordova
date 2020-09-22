@@ -31,7 +31,7 @@ class Device {
     this.platform = window.navigator.platform;
     this.ua = window.navigator.userAgent;
 
-    this.cordova = !!(window.cordova);
+    this.cordova = !!(window["cordova"]);
 
     this.screenWidth = window.screen.width;
     this.screenHeight = window.screen.height;

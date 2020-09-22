@@ -4,7 +4,7 @@
 
   uix-navbar {
     a.icon-only {
-      width: 44px;
+      width: 32px;
       margin: 0;
       justify-content: center;
     }
@@ -20,13 +20,13 @@
       font-weight: 600;
     }
 
-    uix-navbar-left {
-      margin-right: 10px;
-    }
+    // uix-navbar-left {
+    //   margin-right: 10px;
+    // }
 
-    uix-navbar-right {
-      margin-left: 10px;
-    }
+    // uix-navbar-right {
+    //   margin-left: 10px;
+    // }
 
     uix-navbar-right:first-child {
       right: calc(8px + var(--uix-safe-area-right));

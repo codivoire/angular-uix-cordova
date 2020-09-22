@@ -40,7 +40,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.json",
+            "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/assets"
             ],
@@ -87,29 +87,13 @@
               "browserTarget": "hybridapp:build:production"
             }
           }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "hybridapp:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
   },
   "defaultProject": "hybridapp",
   "cli": {
-    "analytics": "fd84a560-e24d-487a-a229-b42d5ea8f275"
+    "defaultCollection": "@ionic/angular-toolkit",
+    "analytics": false
   }
 }

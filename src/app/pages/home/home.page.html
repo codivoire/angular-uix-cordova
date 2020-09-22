@@ -10,7 +10,7 @@
       <span>{{ title }}</span>
     </uix-navbar-title>
     <uix-navbar-right>
-      <a uix-panel-right-open class="link icon-only">
+      <a routerLink="/about" class="link icon-only">
         <i class="icon-ios-information-circle-outline ios-only"></i>
         <i class="icon-md-information-circle-outline md-only"></i>
       </a>
@@ -53,28 +53,14 @@
         <li>
           <a (click)="dialog()" class="item-link item-content">
             <div class="item-inner">
-              <div class="item-title">Test Dialog</div>
+              <div class="item-title">Dialog</div>
             </div>
           </a>
         </li>
         <li>
-          <a (click)="toast()" class="item-link item-content">
+          <a (click)="preload()" class="item-link item-content">
             <div class="item-inner">
-              <div class="item-title">Test Toast</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a (click)="actionsheet()" class="item-link item-content">
-            <div class="item-inner">
-              <div class="item-title">Test Action Sheet</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a (click)="actionsheet()" class="item-link item-content">
-            <div class="item-inner">
-              <div class="item-title">Test Loader</div>
+              <div class="item-title">Loader</div>
             </div>
           </a>
         </li>
@@ -86,7 +72,7 @@
         {{ 'Lorem ipsum dolor sit amet' | truncate:9 }}
       </p>
       <p>
-        <uix-link href="/account/login">Sign In</uix-link>
+        <uix-link href="/about">About</uix-link>
       </p>
       <p>
         <uix-link href="https://www.youtube.com" external>Youtube</uix-link>
